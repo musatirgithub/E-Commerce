@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const {authenticateUser, authorizePermissions} = require('../middlewares/authentication');
-const {getProducts, createProduct, deleteProduct, updateProduct, getProduct} = require('../controllers/taskController');
+const {getProducts, createProduct, deleteProduct, updateProduct, getProduct} = require('../controllers/productController');
 
 // router.get('/all-products', authenticateUser, authorizePermissions('admin'), getAllProducts);
 router.get('/', getProducts);
