@@ -26,7 +26,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 // router requires
 const authRouter = require('./routes/authRoutes');
 const userRouter = require('./routes/userRoutes');
-const taskRouter = require('./routes/taskRoutes');
+const productRouter = require('./routes/productRoutes');
 
 
 // middleware requires
@@ -61,7 +61,7 @@ app.use(fileUpload());
 // router uses
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/user', userRouter);
-app.use('/api/v1/task', taskRouter);
+app.use('/api/v1/task', productRouter);
 
 
 // notFound & Error uses
