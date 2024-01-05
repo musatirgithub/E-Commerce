@@ -4,10 +4,10 @@ const {authenticateUser, authorizePermissions} = require('../middlewares/authent
 const {getProducts, createProduct, deleteProduct, updateProduct, getProduct} = require('../controllers/taskController');
 
 // router.get('/all-products', authenticateUser, authorizePermissions('admin'), getAllProducts);
-router.get('/', authenticateUser, getProducts);
-router.post('/', authenticateUser, createProduct);
-router.delete('/:id', authenticateUser, deleteProduct);
-router.patch('/:id', authenticateUser, updateProduct);
-router.get('/:id', authenticateUser, getProduct);
+router.get('/', getProducts);
+router.post('/', authenticateUser, authorizePermissions('admin'), createProduct);
+router.delete('/:id', authenticateUser, authorizePermissions('admin'), deleteProduct);
+router.patch('/:id', authenticateUser, authorizePermissions('admin'), updateProduct);
+router.get('/:id', getProduct);
 
 module.exports = router;
