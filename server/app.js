@@ -61,7 +61,7 @@ app.use(fileUpload());
 // router uses
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/user', userRouter);
-app.use('/api/v1/task', productRouter);
+app.use('/api/v1/product', productRouter);
 
 
 // notFound & Error uses

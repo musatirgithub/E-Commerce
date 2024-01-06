@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import {useEffect, useState} from "react";
-import useTaskCalls from "../hooks/useProductCalls";
+import useProductCalls from "../hooks/useProductCalls";
 import { FaPencilAlt } from "react-icons/fa";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { IoWarning } from "react-icons/io5";
@@ -11,19 +11,19 @@ import remainingDays from "../utils/remainingDays";
 
 const TaskList = () => {
     const dispatch = useDispatch();
-    const {products} = useSelector((state)=>state.products);
+    const {products} = useSelector((state)=>state.product);
 
     const [loading, setLoading] = useState(true)
-    const {getTasks, deleteTask, getTask} = useTaskCalls();
+    const {getProducts, deleteProduct, getProduct} = useProductCalls();
   
     useEffect(() => {
         setLoading(true);
-            getTasks();
+        getProducts();
         setLoading(false);
     }, [])
 
     const handleClick = (id)=>{
-        getTask(id);
+        getProduct(id);
         dispatch(openModal());
     }
     if(loading){
@@ -61,7 +61,7 @@ const TaskList = () => {
                     </td>
                     <td className="w-[3rem] lg:w-[19rem] text-center">{dateTimeConverter(new Date(product.deadline))}</td>
                     <td className="w-[2.5rem] lg:w-[5rem]"><FaPencilAlt onClick={()=>handleClick(product._id)} className="cursor-pointer w-[1.5rem] mx-auto text-blue-700"/></td>
-                    <td className="w-[2.5rem] lg:w-[5rem]"><FaRegTrashCan onClick={()=>deleteTask(product._id)} className="cursor-pointer w-[1.5rem] mx-auto text-red-700"/></td>
+                    <td className="w-[2.5rem] lg:w-[5rem]"><FaRegTrashCan onClick={()=>deleteProduct(product._id)} className="cursor-pointer w-[1.5rem] mx-auto text-red-700"/></td>
                 </tr>
             )
         })}

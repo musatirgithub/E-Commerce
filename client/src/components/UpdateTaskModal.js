@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import useTaskCalls from "../hooks/useTaskCalls";
+import useTaskCalls from "../hooks/useProductCalls";
 import { useSelector } from "react-redux";
-import { closeModal } from "../features/taskSlice";
+import { closeModal } from "../features/productSlice";
 import { useDispatch } from "react-redux";
 import dateTimeFormatter from "../utils/dateTimeFormatter";
 
