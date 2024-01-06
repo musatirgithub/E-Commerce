@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "https://nodetasktracker.onrender.com/";
+const BASE_URL = "http://localhost:5000/";
 
 //* Axios Instance for Public API Request
 export const axiosPublic = axios.create({
