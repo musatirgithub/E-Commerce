@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "../features/authSlice";
-import taskReducer from "../features/taskSlice";
+import productReducer from "../features/productSlice";
 import userReducer from "../features/userSlice";
 import storage from "redux-persist/lib/storage/"; // defaults to localStorage for web
 
@@ -25,7 +25,7 @@ const persistedReducer = persistReducer(persistConfig, authReducer);
 const store = configureStore({
   reducer: {
     auth: persistedReducer,
-    task: taskReducer,
+    product: productReducer,
     user:userReducer,
   },
 
