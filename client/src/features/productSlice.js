@@ -1,13 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const taskSlice = createSlice({
-  name: "task",
+const productSlice = createSlice({
+  name: "product",
 
   initialState: {
     loading: true,
     error: false,
-    tasks: null,
-    task: null,
+    products: null,
+    product: null,
     isModalOpen:false,
     isSidebarOpen: false,
   },
@@ -21,11 +21,11 @@ const taskSlice = createSlice({
     //   state[url] = data;
     // },
 
-    getTasksSuccess: (state, { payload }) => {
+    getProductsSuccess: (state, { payload }) => {
       state.loading = false;
       state.tasks = payload;
     },
-    getSingleTaskSuccess: (state, { payload }) => {
+    getSingleProductSuccess: (state, { payload }) => {
       state.loading = false;
       state.task = payload;
     },
@@ -51,12 +51,12 @@ const taskSlice = createSlice({
 
 export const {
   fetchStart,
-  getTasksSuccess,
-  getSingleTaskSuccess,
+  getProductsSuccess,
+  getSingleProductSuccess,
   fetchFail,
   openModal,
   closeModal,
   openSidebar,
   closeSidebar,
-} = taskSlice.actions;
-export default taskSlice.reducer;
+} = productSlice.actions;
+export default productSlice.reducer;
