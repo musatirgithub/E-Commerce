@@ -27,7 +27,7 @@ const useProductCalls = () => {
   const getProducts = async () => {
     dispatch(fetchStart());
     try {
-      const { data } = await axiosPublic.get("/api/v1/product", {withCredentials:'include'});
+      const { data } = await axiosPublic.get("/api/v1/product/", {withCredentials:'include'});
       dispatch(getProductsSuccess(data.products));
     } catch (err) {
       dispatch(fetchFail());
