@@ -58,7 +58,6 @@ const getProducts = async (req, res)=>{
     result = result.skip(skip).limit(limit);
 
     const products = await result;
-    console.log(products);
     res.status(StatusCodes.OK).json({products, nbItems:products.length})
 }
 const createProduct = async (req, res)=>{
