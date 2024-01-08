@@ -12,6 +12,7 @@ import VerifyEmail from "../pages/VerifyEmail";
 import VerifyEmailWarning from "../pages/VerifyEmailWarning";
 import ForgotPassword from "../pages/ForgotPassword";
 import ForgotPasswordWarning from "../pages/ForgotPasswordWarning";
+import CreateProduct from "../pages/CreateProduct";
 
 import Navbar from "../components/Navbar";
 import Footbar from "../components/Footbar";
@@ -22,6 +23,7 @@ const AppRouter = ()=>{
             <Navbar/>
             <Routes>
                 <Route path="/" element={<Home/>}/>
+                <Route path="/create-product" element={<CreateProduct/>}/>
                 <Route path="/register" element={<Register/>}/>
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/user/reset-password" element={<ResetPassword/>}/>
