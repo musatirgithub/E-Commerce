@@ -1,11 +1,10 @@
 import { useState } from "react";
-import useAuthCalls from "../hooks/useAuthCalls";
-import { Link } from "react-router-dom";
+import useProductCalls from "../hooks/useProductCalls";
 
 
 const CreateProduct = () => {
-  const {register} = useAuthCalls();
-  const [userInfo, setUserInfo] = useState({name:'', email:'', password:''})
+  const {createProduct} = useProductCalls();
+  const [userInfo, setUserInfo] = useState({name:'', price:0, description:'', image:'', category:'', company:'', inventory:0, featured:false, freeShipping:false})
 
   const handleChange = (e)=>{
     setUserInfo({...userInfo, [e.target.name]:e.target.value})
@@ -13,8 +12,8 @@ const CreateProduct = () => {
 
   const handleSubmit = (e)=>{
     e.preventDefault();
-    register(userInfo);
-    setUserInfo({email:'', password:''});
+    createProduct(userInfo);
+    // setUserInfo({name:'', price:0, description:'', image:'', category:'', company:'', inventory:0, featured:false, freeShipping:false});
     }
 
   return (
@@ -38,7 +37,7 @@ const CreateProduct = () => {
       </div>
         <div className="flex flex-col gap-3">
       <label htmlFor="description" className="text-[#EEEDE8]">Description</label>
-      <input type="number" name="description" id="description" required value={userInfo.description} onChange={handleChange} placeholder="Enter description..."
+      <input type="text" name="description" id="description" required value={userInfo.description} onChange={handleChange} placeholder="Enter description..."
        className="bg-[#D9C6A7] text-[#0D1732] focus:outline-none border border-gray-300 rounded py-2 px-4 block w-full appearance-none placeholder-[#3A3B3C]"/>
       </div>
         <div className="flex flex-col gap-3">
@@ -72,7 +71,7 @@ const CreateProduct = () => {
        className="bg-[#D9C6A7] text-[#0D1732] focus:outline-none border border-gray-300 rounded py-2 px-4 block w-full appearance-none placeholder-[#3A3B3C]"/>
       </div>
       </section>
-      <button type="submit" className={`btn bg-[#F8B664] hover:bg-[#C6A779] text-[#0D1732] w-full`} >Register</button>
+      <button type="submit" className={`btn bg-[#F8B664] hover:bg-[#C6A779] text-[#0D1732] w-full`} >Add Product</button>
     </form>
     </main>
   )
