@@ -55,11 +55,11 @@ const login = async (req,res)=>{
         throw new CustomError.BadRequestError('Please provide email and password')
     }
 
-    const {accessToken, refreshToken:browserRefreshToken} = req.signedCookies;
+    // const {accessToken, refreshToken:browserRefreshToken} = req.signedCookies;
 
-    if(!accessToken && !browserRefreshToken){
-        throw new CustomError.UnauthenticatedError('Make sure cookies are enabled in your browser!')
-    }
+    // if(!accessToken && !browserRefreshToken){
+    //     throw new CustomError.UnauthenticatedError('Make sure cookies are enabled in your browser!')
+    // }
     
     const user = await User.findOne({email});
     if(!user){
