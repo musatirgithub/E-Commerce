@@ -41,7 +41,7 @@ const useProductCalls = () => {
   const createProduct = async (taskInfo) => {
     dispatch(fetchStart());
     try {
-      const {data} = await axiosPublic.post(`/api/v1/task/`, taskInfo, {withCredentials:'include'});
+      const {data} = await axiosPublic.post(`/api/v1/product/`, taskInfo, {withCredentials:'include'});
       toastSuccessNotify(data.msg)
       await getProducts();
     } catch (err) {
