@@ -18,9 +18,9 @@ const attachCookiesToResponse = ({res, user, refreshToken})=>{
         httpOnly:true,
         secure:process.env.NODE_ENV === 'production',
         // secure:false,
-        signed:true,
+        // signed:true,
         maxAge:oneDay,
-        sameSite:"None",
+        // sameSite:"None",
         // secure,
         // path:"/",
     });
@@ -29,9 +29,9 @@ const attachCookiesToResponse = ({res, user, refreshToken})=>{
         httpOnly:true,
         secure:process.env.NODE_ENV === 'production',
         // secure:false,
-        signed:true,
+        // signed:true,
         expires: new Date(Date.now() + longerExpiration),
-        sameSite:"None",
+        // sameSite:"None",
         // secure,
         // path:"/",
     })
