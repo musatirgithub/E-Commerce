@@ -23,11 +23,11 @@ const productSlice = createSlice({
 
     getProductsSuccess: (state, { payload }) => {
       state.loading = false;
-      state.tasks = payload;
+      state.products = payload;
     },
     getSingleProductSuccess: (state, { payload }) => {
       state.loading = false;
-      state.task = payload;
+      state.product = payload;
     },
 
     fetchFail: (state) => {
