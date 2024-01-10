@@ -1,6 +1,10 @@
 import { useState } from "react";
 import useProductCalls from "../hooks/useProductCalls";
 
+const category = ['office', 'kitchen', 'bedroom', 'electronics', 'accessories'];
+
+const company = ['ikea', 'maiden', 'eternity', 'lumens', 'sony', 'bose', 'kitchenaid'];
+
 
 const CreateProduct = () => {
   const {createProduct} = useProductCalls();
@@ -45,10 +49,33 @@ const CreateProduct = () => {
       <input type="text" name="image" id="image" required value={userInfo.image} onChange={handleChange} placeholder="Enter image..."
        className="bg-[#D9C6A7] text-[#0D1732] focus:outline-none border border-gray-300 rounded py-2 px-4 block w-full appearance-none placeholder-[#3A3B3C]"/>
       </div>
-        <div className="flex flex-col gap-3">
-      <label htmlFor="category" className="text-[#EEEDE8]">Category</label>
-      <input type="text" name="category" id="category" required value={userInfo.category} onChange={handleChange} placeholder="Enter category..."
-       className="bg-[#D9C6A7] text-[#0D1732] focus:outline-none border border-gray-300 rounded py-2 px-4 block w-full appearance-none placeholder-[#3A3B3C]"/>
+      <div className="flex flex-col gap-3">
+<label htmlFor="category" className="text-[#EEEDE8]">Category</label>
+<select
+        name="category"
+        id="category"
+        value={userInfo.category}
+        onChange={handleChange}
+        className="bg-[#D9C6A7] text-[#0D1732] focus:outline-none border border-gray-300 rounded py-2 px-4 block w-full appearance-none placeholder-[#3A3B3C]"
+      >
+        {category.map((item, index)=>{
+          return <option value={index}>{item}</option>
+        })}
+      </select>
+      </div>
+      <div className="flex flex-col gap-3">
+<label htmlFor="company" className="text-[#EEEDE8]">Company</label>
+<select
+        name="company"
+        id="company"
+        value={userInfo.company}
+        onChange={handleChange}
+        className="bg-[#D9C6A7] text-[#0D1732] focus:outline-none border border-gray-300 rounded py-2 px-4 block w-full appearance-none placeholder-[#3A3B3C]"
+      >
+        {company.map((item, index)=>{
+          return <option value={index}>{item}</option>
+        })}
+      </select>
       </div>
         <div className="flex flex-col gap-3">
       <label htmlFor="company" className="text-[#EEEDE8]">Company</label>
