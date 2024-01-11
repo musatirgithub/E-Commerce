@@ -52,7 +52,7 @@ const useProductCalls = () => {
   const deleteProduct = async (id) => {
     dispatch(fetchStart());
     try {
-      const {data} = await axiosPublic.delete(`/api/v1/task/${id}`, {withCredentials:'include'});
+      const {data} = await axiosPublic.delete(`/api/v1/product/${id}`, {withCredentials:'include'});
       toastSuccessNotify(data.msg)
       await getProducts();
     } catch (err) {
@@ -63,7 +63,7 @@ const useProductCalls = () => {
   const getProduct = async (id) => {
     dispatch(fetchStart());
     try {
-      const {data} = await axiosPublic.get(`/api/v1/task/${id}`, {withCredentials:'include'});
+      const {data} = await axiosPublic.get(`/api/v1/product/${id}`, {withCredentials:'include'});
       dispatch(getSingleProductSuccess(data.product));
     } catch (err) {
       dispatch(fetchFail());
@@ -73,7 +73,7 @@ const useProductCalls = () => {
   const updateProduct = async (taskInfo, id) => {
     dispatch(fetchStart());
     try {
-      const {data} = await axiosPublic.patch(`/api/v1/task/${id}`, taskInfo, {withCredentials:'include'});
+      const {data} = await axiosPublic.patch(`/api/v1/product/${id}`, taskInfo, {withCredentials:'include'});
       getSingleProductSuccess(data.product);
       toastSuccessNotify(data.msg);
       await getProducts();
