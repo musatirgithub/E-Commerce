@@ -78,11 +78,6 @@ const CreateProduct = () => {
       </select>
       </div>
         <div className="flex flex-col gap-3">
-      <label htmlFor="company" className="text-[#EEEDE8]">Company</label>
-      <input type="text" name="company" id="company" required value={userInfo.company} onChange={handleChange} placeholder="Enter company..."
-       className="bg-[#D9C6A7] text-[#0D1732] focus:outline-none border border-gray-300 rounded py-2 px-4 block w-full appearance-none placeholder-[#3A3B3C]"/>
-      </div>
-        <div className="flex flex-col gap-3">
       <label htmlFor="featured" className="text-[#EEEDE8]">Featured</label>
       <input type="text" name="featured" id="featured" required value={userInfo.featured} onChange={handleChange} placeholder="Enter featured..."
        className="bg-[#D9C6A7] text-[#0D1732] focus:outline-none border border-gray-300 rounded py-2 px-4 block w-full appearance-none placeholder-[#3A3B3C]"/>
