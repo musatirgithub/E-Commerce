@@ -1,9 +1,7 @@
 import { useState } from "react";
 import useProductCalls from "../hooks/useProductCalls";
 
-const category = [
-  'office', 'kitchen', 'bedroom', 'electronics', 'accessories'
-];
+const category = ['office', 'kitchen', 'bedroom', 'electronics', 'accessories'];
 
 const company = ['ikea', 'maiden', 'eternity', 'lumens', 'sony', 'bose', 'kitchenaid'];
 
@@ -14,7 +12,6 @@ const CreateProduct = () => {
 
   const handleChange = (e)=>{
     setUserInfo({...userInfo, [e.target.name]:e.target.value})
-    console.log("userInfo", userInfo);
   }
 
   const handleSubmit = (e)=>{
