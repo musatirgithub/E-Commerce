@@ -70,10 +70,10 @@ const useProductCalls = () => {
       toastErrorNotify(err.response.data.msg);
     }
   };
-  const updateProduct = async (taskInfo, id) => {
+  const updateProduct = async (productInfo, id) => {
     dispatch(fetchStart());
     try {
-      const {data} = await axiosPublic.patch(`/api/v1/product/${id}`, taskInfo, {withCredentials:'include'});
+      const {data} = await axiosPublic.patch(`/api/v1/product/${id}`, productInfo, {withCredentials:'include'});
       getSingleProductSuccess(data.product);
       toastSuccessNotify(data.msg);
       await getProducts();
