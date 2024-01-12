@@ -1,7 +1,9 @@
 import { useState } from "react";
 import useProductCalls from "../hooks/useProductCalls";
 
-const category = ['office', 'kitchen', 'bedroom', 'electronics', 'accessories'];
+const category = [
+  'office', 'kitchen', 'bedroom', 'electronics', 'accessories'
+];
 
 const company = ['ikea', 'maiden', 'eternity', 'lumens', 'sony', 'bose', 'kitchenaid'];
 
@@ -12,6 +14,7 @@ const CreateProduct = () => {
 
   const handleChange = (e)=>{
     setUserInfo({...userInfo, [e.target.name]:e.target.value})
+    console.log("userInfo", userInfo);
   }
 
   const handleSubmit = (e)=>{
@@ -59,7 +62,7 @@ const CreateProduct = () => {
         className="bg-[#D9C6A7] text-[#0D1732] focus:outline-none border border-gray-300 rounded py-2 px-4 block w-full appearance-none placeholder-[#3A3B3C]"
       >
         {category.map((item, index)=>{
-          return <option value={index}>{item}</option>
+          return <option key={index} value={item}>{item}</option>
         })}
       </select>
       </div>
@@ -73,7 +76,7 @@ const CreateProduct = () => {
         className="bg-[#D9C6A7] text-[#0D1732] focus:outline-none border border-gray-300 rounded py-2 px-4 block w-full appearance-none placeholder-[#3A3B3C]"
       >
         {company.map((item, index)=>{
-          return <option value={index}>{item}</option>
+          return <option key={index} value={item}>{item}</option>
         })}
       </select>
       </div>
