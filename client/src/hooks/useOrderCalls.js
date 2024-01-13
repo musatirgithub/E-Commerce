@@ -3,10 +3,11 @@ import { useDispatch } from "react-redux";
 
 import {
   fetchStart,
-  getProductsSuccess,
-  getSingleProductSuccess,
+  getOrdersSuccess,
+  getUserOrdersSuccess,
+  getSingleOrderSuccess,
   fetchFail,
-} from "../features/productSlice";
+} from "../features/orderSlice";
 import {axiosPublic} from "../utils/axiosPublic";
 import { useNavigate } from "react-router-dom";
 import { toastSuccessNotify, toastErrorNotify } from "../helper/ToastNotify";
@@ -28,7 +29,7 @@ const useOrderCalls = () => {
     dispatch(fetchStart());
     try {
       const { data } = await axiosPublic.get("/api/v1/order/", {withCredentials:'include'});
-      dispatch(getProductsSuccess(data.orders));
+      dispatch(getOrdersSuccess(data.orders));
     } catch (err) {
       dispatch(fetchFail());
       // if(err?.response?.status === 401){
@@ -36,6 +37,15 @@ const useOrderCalls = () => {
       //   toastErrorNotify("Login required!")
       //     navigate('/login')
       // }
+    }
+  };
+  const getUserOrders = async () => {
+    dispatch(fetchStart());
+    try {
+      const { data } = await axiosPublic.get("/api/v1/order/", {withCredentials:'include'});
+      dispatch(getUserOrdersSuccess(data.orders));
+    } catch (err) {
+      dispatch(fetchFail());
     }
   };
   const createOrder = async (taskInfo) => {
@@ -64,7 +74,7 @@ const useOrderCalls = () => {
     dispatch(fetchStart());
     try {
       const {data} = await axiosPublic.get(`/api/v1/order/${id}`, {withCredentials:'include'});
-      dispatch(getSingleProductSuccess(data.product));
+      dispatch(getSingleOrderSuccess(data.order));
     } catch (err) {
       dispatch(fetchFail());
       toastErrorNotify(err.response.data.msg);
@@ -74,7 +84,7 @@ const useOrderCalls = () => {
     dispatch(fetchStart());
     try {
       const {data} = await axiosPublic.patch(`/api/v1/order/${id}`, orderInfo, {withCredentials:'include'});
-      getSingleProductSuccess(data.order);
+      getSingleOrderSuccess(data.order);
       toastSuccessNotify(data.msg);
       await getOrders();
       await getOrder(id);
