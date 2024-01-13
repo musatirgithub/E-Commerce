@@ -7,6 +7,7 @@ const orderSlice = createSlice({
     loading: true,
     error: false,
     orders: null,
+    userOrders:null,
     order: null,
   },
   reducers: {
@@ -23,6 +24,10 @@ const orderSlice = createSlice({
       state.loading = false;
       state.orders = payload;
     },
+    getUserOrdersSuccess: (state, { payload }) => {
+      state.loading = false;
+      state.userOrders = payload;
+    },
     getSingleOrderSuccess: (state, { payload }) => {
       state.loading = false;
       state.order = payload;
@@ -38,6 +43,7 @@ const orderSlice = createSlice({
 export const {
   fetchStart,
   getOrdersSuccess,
+  getUserOrdersSuccess,
   getSingleOrderSuccess,
   fetchFail,
 } = orderSlice.actions;
