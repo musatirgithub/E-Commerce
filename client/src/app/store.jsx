@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "../features/authSlice";
 import productReducer from "../features/productSlice";
 import userReducer from "../features/userSlice";
+import orderReducer from "../features/orderSlice";
 import storage from "redux-persist/lib/storage/"; // defaults to localStorage for web
 
 import {
@@ -27,6 +28,7 @@ const store = configureStore({
     auth: persistedReducer,
     product: productReducer,
     user:userReducer,
+    order:orderReducer,
   },
 
   middleware: (getDefaultMiddleware) =>
