@@ -3,6 +3,7 @@ import authReducer from "../features/authSlice";
 import productReducer from "../features/productSlice";
 import userReducer from "../features/userSlice";
 import orderReducer from "../features/orderSlice";
+import reviewReducer from "../features/reviewSlice";
 import storage from "redux-persist/lib/storage/"; // defaults to localStorage for web
 
 import {
@@ -29,6 +30,7 @@ const store = configureStore({
     product: productReducer,
     user:userReducer,
     order:orderReducer,
+    review:reviewReducer,
   },
 
   middleware: (getDefaultMiddleware) =>
