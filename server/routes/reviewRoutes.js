@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const {authenticateUser, authorizePermissions} = require('../middlewares/authentication');
-const {getAllReviews, getUserReviews, createReview, deleteReview, updateReview, getReview} = require('../controllers/taskController');
+const {getAllReviews, getUserReviews, createReview, deleteReview, updateReview, getReview} = require('../controllers/reviewController');
 
 router.get('/all-reviews', authenticateUser, authorizePermissions('admin'), getAllReviews);
 router.get('/', authenticateUser, getUserReviews);
