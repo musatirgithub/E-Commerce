@@ -5,7 +5,7 @@ import logo from "../pics/logo.jpg";
 
 
 const Navbar = () => {
-  const {currentUser} = useSelector((state)=>state.auth)
+  const {currentUser, role} = useSelector((state)=>state.auth)
   const {logout} = useAuthCalls();
   if(currentUser){
     return (
@@ -19,6 +19,7 @@ const Navbar = () => {
         <h4>{`Welcome ${currentUser}`}</h4>
         </div>
         <div className="flex justify-evenly gap-3">
+          {role === 'admin' ? <Link to='/create-product'>New Prdct</Link>:null}
           <Link to='/change-password'>Change Password</Link>
         <h4 onClick={logout} className="cursor-pointer">Logout</h4>
         </div>
