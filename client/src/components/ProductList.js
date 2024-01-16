@@ -6,8 +6,6 @@ import { FaRegTrashCan } from "react-icons/fa6";
 import { IoWarning } from "react-icons/io5";
 import { useDispatch } from "react-redux";
 import { openModal } from "../features/productSlice";
-import dateTimeConverter from "../utils/dateTimeConverter";
-import remainingDays from "../utils/remainingDays";
 
 const TaskList = () => {
     const dispatch = useDispatch();
