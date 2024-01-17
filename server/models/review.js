@@ -29,3 +29,15 @@ const ReviewSchema = mongoose.Schema({
         required:true,
     },
 }, {timeStamps:true})
+
+ReviewSchema.statics.calculateAverageRating = async function (productId) {
+
+    }
+
+    ReviewSchema.post('save', async function(){
+        await this.constructor.calculateAverageRating(this.product);
+    })
+
+    ReviewSchema.post('remove', async function(){
+        await this.constructor.calculateAverageRating(this.product);
+    })
