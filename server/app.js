@@ -14,6 +14,13 @@ const connectDB = require('./db/connect');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const fileUpload = require('express-fileupload');
+const cloudinary = require('cloudinary').v2;
+
+cloudinary.config({
+  cloud_name:process.env.CLOUD_NAME,
+  api_key:process.env.CLOUD_API_KEY,
+  api_secret:process.env.CLOUD_API_SECRET,
+})
 
 // security packages
 const rateLimiter = require('express-rate-limit');
@@ -58,7 +65,7 @@ app.use(cookieParser(process.env.JWT_SECRET));
 
 // static + fileUpload
 app.use(express.static(path.resolve(__dirname, './client/build')));
-app.use(fileUpload());
+app.use(fileUpload({useTempFiles:true}));
 
 // router uses
 app.use('/api/v1/auth', authRouter);
