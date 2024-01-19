@@ -1,6 +1,8 @@
 const Product = require('../models/product');
 const CustomError = require('../errors')
 const {StatusCodes} = require('http-status-codes');
+const cloudinary = require('cloudinary').v2;
+const fs = require('fs');
 const checkPermissions = require('../utils/checkPermissions');
 
 const getProducts = async (req, res)=>{
@@ -96,4 +98,23 @@ const getProduct = async (req, res)=>{
     res.status(StatusCodes.OK).json({product})
 }
 
-module.exports = {getProducts, createProduct, deleteProduct, updateProduct, getProduct};
+const uploadProductImage = async(req,res)=>{
+    if(!req.files){
+        throw new CustomError.BadRequestError('No file uploaded!');
+    }
+    const productImage = req.files.image;
+    if(!productImage.mimetype.startsWith('image')){
+        throw new CustomError.BadRequestError('Please upload an image!');
+    }
+
+    const maxSize = 1024 * 1024;
+    if(productImage.size > maxSize){
+        throw new CustomError.BadRequestError('Image should be smaller than 1MB');
+    }
+
+    const result = await cloudinary.uploader.upload(req.files.image.tempFilePath, {use_filename:true, folder:"node-e-commerce",})
+    fs.unlinkSync(req.files.image.tempFilePath)
+    return res.status(StatusCodes.OK).json({image:{src:result.secure_url}})
+}
+
+module.exports = {getProducts, createProduct, deleteProduct, updateProduct, getProduct, uploadProductImage};
