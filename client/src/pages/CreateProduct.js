@@ -46,7 +46,7 @@ const CreateProduct = () => {
       </div>
         <div className="flex flex-col gap-3">
       <label htmlFor="image" className="text-[#EEEDE8]">Image</label>
-      <input type="text" name="image" id="image" required value={userInfo.image} onChange={handleChange} placeholder="Enter image..."
+      <input type="file" name="image" id="image" required value={userInfo.image} onChange={handleChange} placeholder="Enter image..."
        className="bg-[#D9C6A7] text-[#0D1732] focus:outline-none border border-gray-300 rounded py-2 px-4 block w-full appearance-none placeholder-[#3A3B3C]"/>
       </div>
       <div className="flex flex-col gap-3">
