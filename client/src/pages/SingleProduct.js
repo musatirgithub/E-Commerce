@@ -47,16 +47,16 @@ const SingleProduct = () => {
             <p className=" text-md font-bold capitalize text-center py-3">Average Rating <p className=" min-w-[2rem] bg-red-800 text-white rounded-md inline-block">{product?.averageRating}</p></p>
             <p className=" text-md font-semibold lowercase text-center py-3">({product?.numOfReviews} customer reviews)</p>
             </div>
-            <p className="ps-3 text-lg font-bold text-amber-800">${product.price}</p>
+            <p className="ps-3 text-lg font-bold text-amber-800">${product?.price}</p>
             <p className="ps-3 text-lg font-semibold underline">Description:</p>
-            <p className="ps-3 text-lg">{product.description}</p>
+            <p className="ps-3 text-lg">{product?.description}</p>
             <div className=" ps-3 flex ">
                 <p className="w-[6rem] font-semibold">Available:</p>
-                <p>{product.inventory > 0 ? 'In Stock':'Out of Stock'}</p>
+                <p>{product?.inventory > 0 ? 'In Stock':'Out of Stock'}</p>
             </div>
             <div className=" ps-3 flex ">
                 <p className="w-[6rem] font-semibold">Brand:</p>
-                <p className="capitalize">{product.company}</p>
+                <p className="capitalize">{product?.company}</p>
             </div>
             <div className="underline w-[15rem] mx-auto"></div>
             <div className="my-[2rem] flex justify-center gap-3">
@@ -64,8 +64,8 @@ const SingleProduct = () => {
                 <div className="min-w-[2rem] text-black text-center text-3xl font-bold ">{amount}</div>
                 <div className="min-w-[2rem] bg-gray-300 text-black text-center text-3xl font-bold rounded-md " onClick={handleIncrease}>+</div>
             </div>
-
         </section>
+        <div className=" bg-amber-700 rounded-lg text-white hover:bg-amber-600 w-[15rem] uppercase text-center p-2 font-bold my-5 mx-auto" onClick={()=>navigate('/')}>Add to Cart</div>
     </main>
   )
 }
