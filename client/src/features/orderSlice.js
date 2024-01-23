@@ -9,6 +9,18 @@ const orderSlice = createSlice({
     orders: null,
     userOrders:null,
     order: null,
+    cartItems:[{
+      name:"",
+      image:"",
+      price:0,
+      amount:0,
+      product:"",
+    }],
+    numItemsInCart: 0,
+    cartTotal: 0,
+    shipping: 0,
+    tax: 0,
+    orderTotal: 0,
   },
   reducers: {
     fetchStart: (state) => {
