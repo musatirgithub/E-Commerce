@@ -2,8 +2,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import useProductCalls from "../hooks/useProductCalls";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import {addCartItem} from "../features/orderSlice";
 
 const SingleProduct = () => {
+    const dispatch = useDispatch();
     const {getProduct} = useProductCalls();
     const {product} = useSelector((state)=>state.product);
     const navigate = useNavigate();
@@ -65,7 +68,7 @@ const SingleProduct = () => {
                 <div className="min-w-[2rem] bg-gray-300 text-black text-center text-3xl font-bold rounded-md " onClick={handleIncrease}>+</div>
             </div>
         </section>
-        <div className=" bg-amber-700 rounded-lg text-white hover:bg-amber-600 w-[15rem] uppercase text-center p-2 font-bold my-5 mx-auto" onClick={()=>navigate('/')}>Add to Cart</div>
+        <div className=" bg-amber-700 rounded-lg text-white hover:bg-amber-600 w-[15rem] uppercase text-center p-2 font-bold my-5 mx-auto" onClick={()=>dispatch(addCartItem({...product, amount}))}>Add to Cart</div>
     </main>
   )
 }
