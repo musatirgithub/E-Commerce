@@ -9,13 +9,7 @@ const orderSlice = createSlice({
     orders: null,
     userOrders:null,
     order: null,
-    cartItems:[{
-      name:"",
-      image:"",
-      price:0,
-      amount:0,
-      product:"",
-    }],
+    cartItems:[],
     numItemsInCart: 0,
     cartTotal: 0,
     shipping: 0,
@@ -45,6 +39,25 @@ const orderSlice = createSlice({
       state.order = payload;
     },
 
+    addCartItem: (state, { payload }) => {
+      state.cartItems = [...state.cartItems, payload];
+      state.numItemsInCart += payload.amount;
+      state.cartTotal += payload.amount * payload.price;
+      console.log("cartItems:", state.cartItems);
+      console.log("numItemsInCart", state.numItemsInCart);
+      console.log("state.cartTotal", state.cartTotal);
+    },
+    removeCartItem: (state, { payload }) => {
+      state.cartItems = state.cartItems.filter((items)=>{
+       return items._id !== payload._id;
+      })
+      state.numItemsInCart -= payload.amount;
+      state.cartTotal -= payload.amount * payload.price;
+      console.log("cartItems:", state.cartItems);
+      console.log("numItemsInCart", state.numItemsInCart);
+      console.log("state.cartTotal", state.cartTotal);
+    },
+
     fetchFail: (state) => {
       state.loading = false;
       state.error = true;
@@ -58,5 +71,7 @@ export const {
   getUserOrdersSuccess,
   getSingleOrderSuccess,
   fetchFail,
+  addCartItem,
+  removeCartItem,
 } = orderSlice.actions;
 export default orderSlice.reducer;
