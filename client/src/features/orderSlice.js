@@ -47,12 +47,17 @@ const orderSlice = createSlice({
       console.log("numItemsInCart", state.numItemsInCart);
       console.log("state.cartTotal", state.cartTotal);
     },
+    
     removeCartItem: (state, { payload }) => {
       state.cartItems = state.cartItems.filter((items)=>{
        return items._id !== payload._id;
       })
-      state.numItemsInCart -= payload.amount;
-      state.cartTotal -= payload.amount * payload.price;
+
+      state.cartItems.forEach((item)=>{
+        state.numItemsInCart -= item.amount;
+        state.cartTotal -= item.amount * item.price;
+      })
+
       console.log("cartItems:", state.cartItems);
       console.log("numItemsInCart", state.numItemsInCart);
       console.log("state.cartTotal", state.cartTotal);
