@@ -40,9 +40,19 @@ const orderSlice = createSlice({
     },
 
     addCartItem: (state, { payload }) => {
-      state.cartItems = [...state.cartItems, payload];
-      state.numItemsInCart += payload.amount;
-      state.cartTotal += payload.amount * payload.price;
+      let match = false;
+      state.cartItems.forEach((item)=>{
+        if(payload._id === item.id){
+          state.numItemsInCart += payload.amount;
+          state.cartTotal += payload.amount * payload.price;
+          match = true;
+        }
+      })
+      if(!match){
+        state.cartItems = [...state.cartItems, payload];
+        state.numItemsInCart += payload.amount;
+        state.cartTotal += payload.amount * payload.price;
+      }
       console.log("cartItems:", state.cartItems);
       console.log("numItemsInCart", state.numItemsInCart);
       console.log("state.cartTotal", state.cartTotal);
