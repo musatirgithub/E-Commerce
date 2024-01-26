@@ -48,10 +48,10 @@ const useOrderCalls = () => {
       dispatch(fetchFail());
     }
   };
-  const createOrder = async (taskInfo) => {
+  const createOrder = async (orderInfo) => {
     dispatch(fetchStart());
     try {
-      const {data} = await axiosPublic.post(`/api/v1/order/`, taskInfo, {withCredentials:'include'});
+      const {data} = await axiosPublic.post(`/api/v1/order/`, orderInfo, {withCredentials:'include'});
       toastSuccessNotify(data.msg)
       // await getOrders();
     } catch (err) {
