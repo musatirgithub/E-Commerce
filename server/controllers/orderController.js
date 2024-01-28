@@ -4,6 +4,11 @@ const CustomError = require('../errors');
 const {StatusCodes} = require('http-status-codes');
 const checkPermissions = require('../utils/checkPermissions');
 
+const fakeStripeAPI = async ({amount, currency})=>{
+    const client_secret = 'someRandomValue';
+    return {client_secret, amount};
+}
+
 const getAllOrders = async (req, res)=>{
     const orders = await Order.find({}).select('-user').sort('')
     res.status(StatusCodes.OK).json({orders})
@@ -30,7 +35,27 @@ const createOrder = async (req, res)=>{
         if(!dbProduct){
             throw new CustomError.NotFoundError(`No product with id: ${item.product}`);
         }
+        const {name, price, amount, image, _id} = dbProduct;
+        const singleOrderItem = {
+            amount:item.amount,
+            name, 
+            price, 
+            amount, 
+            image,
+            product: _id,
+        }
+        orderItems = [...orderItems, singleOrderItem];
+        subTotal += item.amount * price;
     }
+
+    const total = tax + shippingFee + subTotal;
+
+    // Stripe fake payment intent 
+
+    const paymentIntent = await fakeStripeAPI({
+        amount:total,
+        currency:'usd',
+    })
 
 
     res.status(StatusCodes.CREATED).json({msg:'Success! Order created'})
