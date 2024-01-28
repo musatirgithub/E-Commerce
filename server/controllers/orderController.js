@@ -1,5 +1,6 @@
 const Order = require('../models/order');
-const CustomError = require('../errors')
+const Product = require('../models/product');
+const CustomError = require('../errors');
 const {StatusCodes} = require('http-status-codes');
 const checkPermissions = require('../utils/checkPermissions');
 
@@ -21,7 +22,15 @@ const createOrder = async (req, res)=>{
     }
 
 
-    // Order create logic will be provided here
+    let orderItems = [];
+    let subTotal = 0;
+
+    for (let item of cartItems){
+        const dbProduct = await Product.findOne({_id:item.product});
+        if(!dbProduct){
+            throw new CustomError.NotFoundError(`No product with id: ${item.product}`);
+        }
+    }
 
 
     res.status(StatusCodes.CREATED).json({msg:'Success! Order created'})
