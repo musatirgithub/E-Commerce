@@ -7,9 +7,9 @@ const orderSlice = createSlice({
     loading: true,
     error: false,
     orders: null,
-    userOrders:null,
+    userOrders: null,
     order: null,
-    cartItems:[],
+    cartItems: [],
     numItemsInCart: 0,
     cartTotal: 0,
     shipping: 0,
@@ -40,37 +40,37 @@ const orderSlice = createSlice({
     },
 
     addCartItem: (state, { payload }) => {
-      let match = false;
-      state.cartItems.forEach((item)=>{
-        if(payload._id === item.id){
-          state.numItemsInCart += payload.amount;
-          state.cartTotal += payload.amount * payload.price;
-          match = true;
-        }
-      })
-      if(!match){
-        state.cartItems = [...state.cartItems, payload];
-        state.numItemsInCart += payload.amount;
-        state.cartTotal += payload.amount * payload.price;
-      }
-      console.log("cartItems:", state.cartItems);
-      console.log("numItemsInCart", state.numItemsInCart);
-      console.log("state.cartTotal", state.cartTotal);
-    },
-    
-    removeCartItem: (state, { payload }) => {
-      state.cartItems = state.cartItems.filter((items)=>{
-       return items._id !== payload._id;
-      })
+      const { product } = payload;
+      const existingItem = state.cartItems.find(
+        (item) => item.productID === product.productID
+      );
 
-      state.cartItems.forEach((item)=>{
+      if (existingItem) {
+        // Product already exists in the cart, update the quantity
+        existingItem.amount += Number(product.amount);
+      } else {
+        // Product doesn't exist in the cart, add a new item
+        state.cartItems = [...state.cartItems, product];
+      }
+
+      state.numItemsInCart += Number(product.amount);
+      state.cartTotal += product.amount * product.price;
+
+    },
+
+    removeCartItem: (state, { payload }) => {
+      state.cartItems = state.cartItems.filter((items) => {
+        return items._id !== payload._id;
+      });
+
+      state.cartItems.forEach((item) => {
         state.numItemsInCart -= item.amount;
         state.cartTotal -= item.amount * item.price;
-      })
+      });
 
       console.log("cartItems:", state.cartItems);
-      console.log("numItemsInCart", state.numItemsInCart);
-      console.log("state.cartTotal", state.cartTotal);
+      // console.log("numItemsInCart", state.numItemsInCart);
+      // console.log("state.cartTotal", state.cartTotal);
     },
 
     fetchFail: (state) => {
