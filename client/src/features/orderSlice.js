@@ -55,7 +55,6 @@ const orderSlice = createSlice({
 
       state.numItemsInCart += Number(product.amount);
       state.cartTotal += product.amount * product.price;
-
     },
 
     removeCartItem: (state, { payload }) => {
