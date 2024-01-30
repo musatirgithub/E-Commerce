@@ -7,6 +7,7 @@ import useProductCalls from "../hooks/useProductCalls";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { openModal } from "../features/productSlice";
+import {formatPrice} from "../utils/formatPrice";
 
 const TaskList = () => {
   const dispatch = useDispatch();
@@ -52,7 +53,7 @@ const TaskList = () => {
             <div className="text-white rounded-b-lg">
               <div className="flex justify-between w-[21rem] ">
                 <p>{product.name}</p>
-                <p>{`$${product.price / 100}`}</p>
+                <p>{formatPrice(product.price)}</p>
               </div>
               <p className="line-clamp-3">{product.description}</p>
             </div>
