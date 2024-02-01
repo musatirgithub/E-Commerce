@@ -64,11 +64,16 @@ const orderSlice = createSlice({
       state.cartItems = state.cartItems.filter((items) => {
         return items._id !== payload._id;
       });
-
+      state.numItemsInCart = 0;
+      state.cartTotal = 0;
       state.cartItems.forEach((item) => {
-        state.numItemsInCart -= item.amount;
-        state.cartTotal -= item.amount * item.price;
+        state.numItemsInCart += item.amount;
+        state.cartTotal += item.amount * item.price;
       });
+
+      state.tax = state.cartTotal * 0.05;
+      state.shipping = 750;
+      state.orderTotal = state.cartTotal + state.tax + state.shipping;
 
       console.log("cartItems:", state.cartItems);
       // console.log("numItemsInCart", state.numItemsInCart);
