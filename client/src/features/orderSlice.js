@@ -72,7 +72,7 @@ const orderSlice = createSlice({
       });
 
       state.tax = state.cartTotal * 0.05;
-      state.shipping = 750;
+      state.cartItems.length > 0 ? state.shipping = 750 : state.shipping = 0;
       state.orderTotal = state.cartTotal + state.tax + state.shipping;
 
       console.log("cartItems:", state.cartItems);
