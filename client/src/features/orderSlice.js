@@ -42,7 +42,7 @@ const orderSlice = createSlice({
     addCartItem: (state, { payload }) => {
       const { product } = payload;
       const existingItem = state.cartItems.find(
-        (item) => item.productID === product.productID
+        (item) => item.productId === product.productId
       );
 
       if (existingItem) {
@@ -62,7 +62,7 @@ const orderSlice = createSlice({
 
     removeCartItem: (state, { payload }) => {
       state.cartItems = state.cartItems.filter((items) => {
-        return items._id !== payload._id;
+        return items.productId !== payload;
       });
       state.numItemsInCart = 0;
       state.cartTotal = 0;
@@ -74,10 +74,42 @@ const orderSlice = createSlice({
       state.tax = state.cartTotal * 0.05;
       state.cartItems.length > 0 ? state.shipping = 750 : state.shipping = 0;
       state.orderTotal = state.cartTotal + state.tax + state.shipping;
+    },
 
-      console.log("cartItems:", state.cartItems);
-      // console.log("numItemsInCart", state.numItemsInCart);
-      // console.log("state.cartTotal", state.cartTotal);
+    increaseCartItem: (state, { payload }) => {
+      console.log(payload);
+      const selectedItem = state.cartItems.find(
+        (item) => item.productId === payload
+      );
+
+      if (selectedItem) {
+        // Product already exists in the cart, update the quantity
+        selectedItem.amount += 1;
+
+        state.numItemsInCart += 1;
+        state.cartTotal += selectedItem.price;
+        state.tax = state.cartTotal * 0.05;
+        state.shipping = 750;
+        state.orderTotal = state.cartTotal + state.tax + state.shipping;
+      } 
+    },
+
+    decreaseCartItem: (state, { payload }) => {
+      const selectedItem = state.cartItems.find(
+        (item) => item.productId === payload
+      );
+
+      if (selectedItem) {
+        // Product already exists in the cart, update the quantity
+        if(selectedItem.amount > 1){
+          selectedItem.amount -= 1;
+          state.numItemsInCart -= 1;
+          state.cartTotal -= selectedItem.price;
+          state.tax = state.cartTotal * 0.05;
+          state.shipping = 750;
+          state.orderTotal = state.cartTotal + state.tax + state.shipping;
+        }
+      } 
     },
 
     fetchFail: (state) => {
@@ -95,5 +127,7 @@ export const {
   fetchFail,
   addCartItem,
   removeCartItem,
+  increaseCartItem,
+  decreaseCartItem,
 } = orderSlice.actions;
 export default orderSlice.reducer;
