@@ -27,9 +27,9 @@ const SingleProduct = () => {
     }
 
     const cartProduct = {
-        productID: product?._id,
+        productId: product?._id,
         image: product?.image,
-        title: product?.title,
+        name: product?.name,
         price: product?.price,
         company: product?.company,
         amount: Number(amount),
@@ -37,7 +37,7 @@ const SingleProduct = () => {
 
       const handleAddProduct = ()=>{
         dispatch(addCartItem({product: cartProduct}));
-        navigate()
+        navigate('/cart');
       }
 
     useEffect(() => {
@@ -54,7 +54,7 @@ const SingleProduct = () => {
     <main>
         <div className=" bg-amber-700 rounded-lg text-white hover:bg-amber-600 w-[15rem] uppercase text-center p-2 font-bold my-5 mx-auto" onClick={()=>navigate('/')}>Back to Products</div>
         <section>
-            <div className="w-[22rem] object-cover object-center mx-auto">
+            <div className="w-[15rem] object-cover object-center mx-auto">
                 <img src={product?.image} alt={product?.name}/>
             </div>
             <p className=" text-3xl font-bold capitalize text-center py-3">{product?.name}</p>
@@ -84,7 +84,6 @@ const SingleProduct = () => {
             </div>
         </section>
         <div className=" bg-amber-700 rounded-lg text-white hover:bg-amber-600 w-[15rem] uppercase text-center p-2 font-bold my-5 mx-auto" onClick={handleAddProduct}>Add to Cart</div>
-        <div className=" bg-amber-700 rounded-lg text-white hover:bg-amber-600 w-[15rem] uppercase text-center p-2 font-bold my-5 mx-auto" onClick={()=>dispatch(removeCartItem({cartProduct}))}>Remove Item</div>
     </main>
   )
 }
