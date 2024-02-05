@@ -14,9 +14,12 @@ import ForgotPassword from "../pages/ForgotPassword";
 import ForgotPasswordWarning from "../pages/ForgotPasswordWarning";
 import CreateProduct from "../pages/CreateProduct";
 import SingleProduct from "../pages/SingleProduct";
+import Checkout from "../pages/Checkout";
+import Cart from "../pages/Cart";
 
 import Navbar from "../components/Navbar";
 import Footbar from "../components/Footbar";
+
 
 const AppRouter = ()=>{
     return(
@@ -26,6 +29,8 @@ const AppRouter = ()=>{
                 <Route path="/" element={<Home/>}/>
                 <Route path="/create-product" element={<CreateProduct/>}/>
                 <Route path='/single-product/:id' element={<SingleProduct />}/>
+                <Route path="/checkout" element={<Checkout/>}/>
+                <Route path="/cart" element={<Cart/>}/>
                 <Route path="/register" element={<Register/>}/>
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/user/reset-password" element={<ResetPassword/>}/>
