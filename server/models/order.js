@@ -47,6 +47,10 @@ const OrderSchema = new mongoose.Schema({
         enum:['pending', 'failed', 'paid', 'delivered', 'canceled'],
         default:'pending',
     },
+    address:{
+        type:String, 
+        required:true,
+    },
     user:{
         type:mongoose.Types.ObjectId,
         ref:'User',
