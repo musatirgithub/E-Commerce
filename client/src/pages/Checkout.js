@@ -1,20 +1,13 @@
 import { useSelector } from 'react-redux';
-import { CheckoutForm, SectionTitle, CartTotals } from '../components';
-import { toast } from 'react-toastify';
-import { redirect } from 'react-router-dom';
+import SectionTitle from '../components/SectionTitle';
 
-export const loader = (store) => () => {
-  const user = store.getState().userState.user;
 
-  if (!user) {
-    toast.warn('You must be logged in to checkout');
-    return redirect('/login');
-  }
-  return null;
-};
+// import { toast } from 'react-toastify';
+// import { redirect } from 'react-router-dom';
+
 
 const Checkout = () => {
-  const cartTotal = useSelector((state) => state.cartState.cartTotal);
+  const {cartTotal, cartItems, shipping, tax, orderTotal} = useSelector((state) => state.order);
   if (cartTotal === 0) {
     return <SectionTitle text='Your cart is empty' />;
   }
@@ -22,8 +15,8 @@ const Checkout = () => {
     <>
       <SectionTitle text='place your order' />
       <div className='mt-8 grid gap-8 md:grid-cols-2 items-start'>
-        <CheckoutForm />
-        <CartTotals />
+        {/* <CheckoutForm />
+        <CartTotals /> */}
       </div>
     </>
   );
