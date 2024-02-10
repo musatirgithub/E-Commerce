@@ -3,12 +3,18 @@ const Product = require("../models/product");
 const CustomError = require("../errors");
 const { StatusCodes } = require("http-status-codes");
 const checkPermissions = require("../utils/checkPermissions");
+const stripe = require("stripe")(process.env.STRIPE_KEY, {
+  apiVersion: "2023-10-16",
+});
 
-const fakeStripeAPI = async ({ amount, currency }) => {
-  const client_secret = "someRandomValue";
-  return { client_secret, amount };
+// const fakeStripeAPI = async ({ amount, currency }) => {
+//   const client_secret = "someRandomValue";
+//   return { client_secret, amount };
+// };
+
+const config = (req, res) => {
+  res.send({publishableKey: process.env.PUBLISHABLE_KEY})
 };
-
 const getAllOrders = async (req, res) => {
   const orders = await Order.find({}).select("-user").sort("");
   res.status(StatusCodes.OK).json({ orders });
@@ -57,10 +63,10 @@ const createOrder = async (req, res) => {
 
   // Stripe fake payment intent
 
-  const paymentIntent = await fakeStripeAPI({
-    amount: total,
-    currency: "usd",
-  });
+  // const paymentIntent = await fakeStripeAPI({
+  //   amount: total,
+  //   currency: "usd",
+  // });
 
   const order = await Order.create({
     orderItems,
@@ -72,7 +78,9 @@ const createOrder = async (req, res) => {
     user: req.user.userId,
   });
 
-  res.status(StatusCodes.CREATED).json({ order, clientSecret: order.clientSecret });
+  res
+    .status(StatusCodes.CREATED)
+    .json({ order, clientSecret: order.clientSecret });
 };
 const deleteOrder = async (req, res) => {
   const { id: orderId } = req.params;
@@ -113,4 +121,5 @@ module.exports = {
   deleteOrder,
   updateOrder,
   getOrder,
+  config,
 };
