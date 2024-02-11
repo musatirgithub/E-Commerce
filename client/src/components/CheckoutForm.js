@@ -35,15 +35,19 @@ const CheckoutForm = () => {
     }
 
   return (
-    <form id="payment-form" onSubmit={handleSubmit}>
+    <div className="lg:w-[45rem]">
+    <form id="payment-form" onSubmit={handleSubmit} >
         <PaymentElement />
-        <button disabled={isProcessing} id="submit" className="btn btn-primary">
+        <div className="flex justify-center">
+        <button disabled={isProcessing} id="submit" className="btn btn-primary btn-wide">
             <span id="button-text">
                 {isProcessing ? "Processing...":"Pay now"}
             </span>
         </button>
+        </div>
         {message && <div id="payment-message">{message}</div>}
     </form>
+    </div>
   )
 }
 
