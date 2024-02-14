@@ -16,6 +16,8 @@ import CreateProduct from "../pages/CreateProduct";
 import SingleProduct from "../pages/SingleProduct";
 import Checkout from "../pages/Checkout";
 import Cart from "../pages/Cart";
+import Payment from "../pages/Payment";
+import Completion from "../pages/Completion";
 
 import Navbar from "../components/Navbar";
 import Footbar from "../components/Footbar";
@@ -28,8 +30,10 @@ const AppRouter = ()=>{
             <Routes>
                 <Route path="/" element={<Home/>}/>
                 <Route path="/create-product" element={<CreateProduct/>}/>
+                <Route path="/payment" element={<Payment />}/>
                 <Route path='/single-product/:id' element={<SingleProduct />}/>
                 <Route path="/checkout" element={<Checkout/>}/>
+                <Route path="/completion" element={<Completion/>}/>
                 <Route path="/cart" element={<Cart/>}/>
                 <Route path="/register" element={<Register/>}/>
                 <Route path="/login" element={<Login/>}/>
