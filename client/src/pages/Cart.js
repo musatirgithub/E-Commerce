@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { formatPrice } from "../utils/formatPrice";
 import { useDispatch } from "react-redux";
@@ -6,6 +7,7 @@ import {
   removeCartItem,
   increaseCartItem,
   decreaseCartItem,
+  addAddress,
 } from "../features/orderSlice";
 import { MdDelete } from "react-icons/md";
 
@@ -16,8 +18,18 @@ const Cart = () => {
   const { currentUser } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [address, setAddress] = useState({street:"", number:"", postal:"", country:""});
+  const handleChange= (e)=>{
+    setAddress({...address, [e.target.name]:e.target.value})
+  }
+
+  const handleProceed = ()=>{
+    const orderAddress = address.street + " " +  String(address.number) + " " + String(address.postal) + " " + address.country;
+    dispatch(addAddress(orderAddress))
+  }
   return (
     <main className="min-h-[calc(100vh-8rem)]">
+      {/* This section lists the cart items */}
       <section className="text-3xl text-center mx-auto underline p-2">
         Shopping Cart
       </section>
@@ -64,6 +76,26 @@ const Cart = () => {
       </section>
 
       <section className="w-[20rem] bg-slate-200 mx-auto rounded-lg my-2">
+        <div>
+          <label htmlFor="street">Street</label>
+          <input type="text" id="street" name="street" value={address.street} onChange={handleChange}/>
+        </div>
+        <div>
+          <label htmlFor="number">Number</label>
+          <input type="number" id="number" name="number" value={address.number} onChange={handleChange}/>
+        </div>
+        <div>
+          <label htmlFor="postal">Postal Code</label>
+          <input type="number" id="postal" name="postal" value={address.postal} onChange={handleChange}/>
+        </div>
+        <div>
+          <label htmlFor="postal">Country</label>
+          <input type="text" id="country" name="country" value={address.country} onChange={handleChange}/>
+        </div>
+      </section>
+
+      {/* This section shows payment details */}
+      <section className="w-[20rem] bg-slate-200 mx-auto rounded-lg my-2">
         <div className="flex justify-between border-b-2 border-slate-300 w-[80%] mx-auto pt-4">
           <h5>Cart Total </h5>
           <h5>{formatPrice(cartTotal)} </h5>
@@ -83,11 +115,16 @@ const Cart = () => {
       </section>
       <section className="flex justify-center">
         {currentUser ? (
-          <button className="bg-amber-700 rounded-lg text-white hover:bg-amber-600 w-[16rem] uppercase p-2 font-bold my-5">
+          <button className="bg-amber-700 rounded-lg text-white hover:bg-amber-600 w-[16rem] uppercase p-2 font-bold my-5" onClick={handleProceed}>
             Proceed to Checkout
           </button>
         ) : (
-          <button className="bg-amber-700 rounded-lg text-white hover:bg-amber-600 w-[16rem] uppercase p-2 font-bold my-5" onClick={()=>navigate('/login')}>Please Login</button>
+          <button
+            className="bg-amber-700 rounded-lg text-white hover:bg-amber-600 w-[16rem] uppercase p-2 font-bold my-5"
+            onClick={() => navigate("/login")}
+          >
+            Please Login
+          </button>
         )}
       </section>
     </main>
