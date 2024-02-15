@@ -10,6 +10,7 @@ const orderSlice = createSlice({
     userOrders: null,
     order: null,
     cartItems: [],
+    address:null,
     numItemsInCart: 0,
     cartTotal: 0,
     shipping: 0,
