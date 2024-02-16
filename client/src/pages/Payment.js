@@ -1,14 +1,18 @@
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { loadStripe } from "@stripe/stripe-js";
 import { axiosPublic } from "../utils/axiosPublic";
 import CheckoutForm from "../components/CheckoutForm";
 import { Elements } from "@stripe/react-stripe-js";
 
 const Payment = () => {
+  const { cartTotal, cartItems, shipping, tax, orderTotal, address } = useSelector(
+    (state) => state.order
+  );
   const [stripePromise, setStripePromise] = useState(null);
   const [clientSecret, setClientSecret] = useState(null);
-  const orderInfo = {};
 
+  const orderInfo = {};
   const getPK = async () => {
     const { data } = await axiosPublic.get("/api/v1/order/config", {
       withCredentials: "include",
