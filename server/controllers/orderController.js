@@ -61,13 +61,26 @@ const createOrder = async (req, res) => {
 
   const total = tax + shippingFee + subTotal;
 
-  // Stripe fake payment intent
+  // Stripe payment intent
+  const striper= async()=>{
+  try {
+    const paymentIntent = await stripe.paymentIntents.create({
+      currency:"usd",
+      amount:total,
+      automatic_payment_methods:{enabled:true},
+    })
+    return {clientSecret:paymentIntent.client_secret}
+  } catch (error) {
+    return res.status(StatusCodes.BAD_REQUEST).send({error:{message:error.message}});
+  }
+}
 
+  // Stripe fake payment intent
   // const paymentIntent = await fakeStripeAPI({
   //   amount: total,
   //   currency: "usd",
   // });
-
+  const {clientSecret} = striper();
   const order = await Order.create({
     orderItems,
     total,
@@ -114,6 +127,19 @@ const getOrder = async (req, res) => {
   res.status(StatusCodes.OK).json({ order });
 };
 
+const createPaymentIntent = async (req,res)=>{
+  try {
+    const paymentIntent = await stripe.paymentIntents.create({
+      currency:"eur",
+      amount:1999,
+      automatic_payment_methods:{enabled:true},
+    })
+    return res.status(StatusCodes.OK).json({clientSecret:paymentIntent.client_secret});
+  } catch (error) {
+    return res.status(StatusCodes.BAD_REQUEST).send({error:{message:error.message}});
+  }
+}
+
 module.exports = {
   getAllOrders,
   getUserOrders,
@@ -122,4 +148,5 @@ module.exports = {
   updateOrder,
   getOrder,
   config,
+  createPaymentIntent,
 };
