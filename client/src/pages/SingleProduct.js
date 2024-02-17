@@ -27,11 +27,10 @@ const SingleProduct = () => {
     }
 
     const cartProduct = {
-        productId: product?._id,
+        product: product?._id,
         image: product?.image,
         name: product?.name,
         price: product?.price,
-        company: product?.company,
         amount: Number(amount),
       };
 
