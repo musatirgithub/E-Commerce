@@ -15,6 +15,7 @@ const Cart = () => {
   const { cartTotal, cartItems, shipping, tax, orderTotal } = useSelector(
     (state) => state.order
   );
+
   const { currentUser } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -25,7 +26,8 @@ const Cart = () => {
 
   const handleProceed = ()=>{
     const orderAddress = address.street + " " +  String(address.number) + " " + String(address.postal) + " " + address.country;
-    dispatch(addAddress(orderAddress))
+    dispatch(addAddress(orderAddress));
+    navigate('/payment');
   }
   return (
     <main className="min-h-[calc(100vh-8rem)]">
@@ -38,7 +40,7 @@ const Cart = () => {
           return (
             <article
               className="flex justify-evenly items-center"
-              key={item.productId}
+              key={item.product}
             >
               <div className="w-[5rem] object-cover">
                 <img src={item.image} alt="item.name" />
