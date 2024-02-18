@@ -13,7 +13,7 @@ const stripe = require("stripe")(process.env.STRIPE_KEY, {
 // };
 
 const config = (req, res) => {
-  res.send({publishableKey: process.env.PUBLISHABLE_KEY})
+  res.send({ publishableKey: process.env.PUBLISHABLE_KEY });
 };
 const getAllOrders = async (req, res) => {
   const orders = await Order.find({}).select("-user").sort("");
@@ -25,8 +25,10 @@ const getUserOrders = async (req, res) => {
     .sort("");
   res.status(StatusCodes.OK).json({ orders });
 };
+
 const createOrder = async (req, res) => {
-  const { tax, shippingFee, item: cartItems } = req.body;
+  const { tax, shipping: shippingFee, cartItems, address } = req.body;
+
   if (!cartItems || cartItems.length < 1) {
     throw new CustomError.BadRequestError("No cart items provided!");
   }
@@ -38,7 +40,7 @@ const createOrder = async (req, res) => {
 
   let orderItems = [];
   let subTotal = 0;
-
+  
   for (let item of cartItems) {
     const dbProduct = await Product.findOne({ _id: item.product });
     if (!dbProduct) {
@@ -46,12 +48,12 @@ const createOrder = async (req, res) => {
         `No product with id: ${item.product}`
       );
     }
+
     const { name, price, amount, image, _id } = dbProduct;
     const singleOrderItem = {
       amount: item.amount,
       name,
       price,
-      amount,
       image,
       product: _id,
     };
@@ -61,39 +63,28 @@ const createOrder = async (req, res) => {
 
   const total = tax + shippingFee + subTotal;
 
-  // Stripe payment intent
-  const striper= async()=>{
-  try {
-    const paymentIntent = await stripe.paymentIntents.create({
-      currency:"usd",
-      amount:total,
-      automatic_payment_methods:{enabled:true},
-    })
-    return {clientSecret:paymentIntent.client_secret}
-  } catch (error) {
-    return res.status(StatusCodes.BAD_REQUEST).send({error:{message:error.message}});
-  }
-}
+  //   // Stripe payment intent
+  
+  const paymentIntent = await stripe.paymentIntents.create({
+    currency: "usd",
+    amount: total,
+    automatic_payment_methods: { enabled: true },
+  });
 
-  // Stripe fake payment intent
-  // const paymentIntent = await fakeStripeAPI({
-  //   amount: total,
-  //   currency: "usd",
-  // });
-  const {clientSecret} = striper();
   const order = await Order.create({
     orderItems,
     total,
-    subTotal,
+    subtotal:subTotal,
     tax,
     shippingFee,
+    address,
     clientSecret: paymentIntent.client_secret,
     user: req.user.userId,
   });
 
   res
-    .status(StatusCodes.CREATED)
-    .json({ order, clientSecret: order.clientSecret });
+    .status(StatusCodes.OK)
+    .json({ msg: "Order Created", clientSecret: paymentIntent.client_secret });
 };
 const deleteOrder = async (req, res) => {
   const { id: orderId } = req.params;
@@ -127,18 +118,22 @@ const getOrder = async (req, res) => {
   res.status(StatusCodes.OK).json({ order });
 };
 
-const createPaymentIntent = async (req,res)=>{
+const createPaymentIntent = async (req, res) => {
   try {
     const paymentIntent = await stripe.paymentIntents.create({
-      currency:"eur",
-      amount:1999,
-      automatic_payment_methods:{enabled:true},
-    })
-    return res.status(StatusCodes.OK).json({clientSecret:paymentIntent.client_secret});
+      currency: "eur",
+      amount: 1999,
+      automatic_payment_methods: { enabled: true },
+    });
+    return res
+      .status(StatusCodes.OK)
+      .json({ clientSecret: paymentIntent.client_secret });
   } catch (error) {
-    return res.status(StatusCodes.BAD_REQUEST).send({error:{message:error.message}});
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .send({ error: { message: error.message } });
   }
-}
+};
 
 module.exports = {
   getAllOrders,
