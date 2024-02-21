@@ -16,6 +16,7 @@ const orderSlice = createSlice({
     shipping: 0,
     tax: 0,
     orderTotal: 0,
+    clientSecret:null,
   },
   reducers: {
     fetchStart: (state) => {
@@ -39,11 +40,14 @@ const orderSlice = createSlice({
       state.loading = false;
       state.order = payload;
     },
+    setClientSecret: (state, {payload})=>{
+      state.clientSecret = payload;
+    },
 
     addCartItem: (state, { payload }) => {
       const { product } = payload;
       const existingItem = state.cartItems.find(
-        (item) => item.productId === product.productId
+        (item) => item.product === product.product
       );
 
       if (existingItem) {
@@ -113,6 +117,10 @@ const orderSlice = createSlice({
       } 
     },
 
+    addAddress:(state, {payload})=>{
+      state.address = payload
+    },
+
     fetchFail: (state) => {
       state.loading = false;
       state.error = true;
@@ -130,5 +138,7 @@ export const {
   removeCartItem,
   increaseCartItem,
   decreaseCartItem,
+  addAddress,
+  setClientSecret,
 } = orderSlice.actions;
 export default orderSlice.reducer;
