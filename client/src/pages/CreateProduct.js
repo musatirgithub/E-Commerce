@@ -8,14 +8,23 @@ const company = ['ikea', 'maiden', 'eternity', 'lumens', 'sony', 'bose', 'kitche
 
 const CreateProduct = () => {
   const {createProduct} = useProductCalls();
-  const [userInfo, setUserInfo] = useState({name:'', price:0, description:'', image:'', category:'', company:'', inventory:0, featured:false, freeShipping:false})
+  const [userInfo, setUserInfo] = useState({name:'', price:0, description:'', image:'', category:'', company:'', inventory:0, featured:false, freeShipping:false});
+  const [file, setFile] = useState(null);
 
   const handleChange = (e)=>{
     setUserInfo({...userInfo, [e.target.name]:e.target.value})
+
   }
 
+  const handleFileChange = (e)=>{
+    setFile(e.target.files[0])
+    
+  }
+  console.log(file);
   const handleSubmit = (e)=>{
     e.preventDefault();
+    const formData = new FormData();
+    formData.append('image', file);
     createProduct(userInfo);
     // setUserInfo({name:'', price:0, description:'', image:'', category:'', company:'', inventory:0, featured:false, freeShipping:false});
     }
@@ -46,7 +55,7 @@ const CreateProduct = () => {
       </div>
         <div className="flex flex-col gap-3">
       <label htmlFor="image" className="text-[#EEEDE8]">Image</label>
-      <input type="file" name="image" id="image" required value={userInfo.image} onChange={handleChange} placeholder="Enter image..."
+      <input type="file" name="image" id="image" required onChange={handleFileChange} placeholder="Select image..."
        className="bg-[#D9C6A7] text-[#0D1732] focus:outline-none border border-gray-300 rounded py-2 px-4 block w-full appearance-none placeholder-[#3A3B3C]"/>
       </div>
       <div className="flex flex-col gap-3">
