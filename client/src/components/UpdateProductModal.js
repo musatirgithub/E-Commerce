@@ -76,7 +76,7 @@ const UpdateProductModal = () => {
               Name
             </label>
             <input
-              type="name"
+              type="text"
               name="name"
               id="name"
               required
