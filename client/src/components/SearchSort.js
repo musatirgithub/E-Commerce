@@ -31,7 +31,7 @@ const SearchSort = () => {
         </div>
         <div>
           <label htmlFor="minprice" className="text-[#EEEDE8]">
-            Price
+            Min Price
           </label>
           <input
             type="number"
@@ -46,7 +46,7 @@ const SearchSort = () => {
         </div>
         <div>
           <label htmlFor="maxprice" className="text-[#EEEDE8]">
-            Price
+            Max Price
           </label>
           <input
             type="number"
@@ -54,6 +54,36 @@ const SearchSort = () => {
             id="maxprice"
             required
             value={formData.maxprice}
+            onChange={handleChange}
+            placeholder="Enter price..."
+            className="bg-[#D9C6A7] text-[#0D1732] focus:outline-none border border-gray-300 rounded py-2 px-4 block w-full appearance-none placeholder-[#3A3B3C]"
+          />
+        </div>
+        <div>
+          <label htmlFor="minrating" className="text-[#EEEDE8]">
+            Min Rating
+          </label>
+          <input
+            type="number"
+            name="minrating"
+            id="minrating"
+            required
+            value={formData.minrating}
+            onChange={handleChange}
+            placeholder="Enter price..."
+            className="bg-[#D9C6A7] text-[#0D1732] focus:outline-none border border-gray-300 rounded py-2 px-4 block w-full appearance-none placeholder-[#3A3B3C]"
+          />
+        </div>
+        <div>
+          <label htmlFor="maxrating" className="text-[#EEEDE8]">
+            Max Rating
+          </label>
+          <input
+            type="number"
+            name="maxrating"
+            id="maxrating"
+            required
+            value={formData.maxrating}
             onChange={handleChange}
             placeholder="Enter price..."
             className="bg-[#D9C6A7] text-[#0D1732] focus:outline-none border border-gray-300 rounded py-2 px-4 block w-full appearance-none placeholder-[#3A3B3C]"
