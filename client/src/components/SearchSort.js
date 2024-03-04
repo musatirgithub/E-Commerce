@@ -2,6 +2,7 @@ import { useState } from "react";
 
 const SearchSort = () => {
   const [formData, setFormData] = useState();
+  const handleChange = ()=>{}
   const company = [
     "ikea",
     "maiden",
@@ -120,17 +121,17 @@ const SearchSort = () => {
             onChange={handleChange}
             className="bg-[#D9C6A7] text-[#0D1732] focus:outline-none border border-gray-300 rounded py-2 px-4 block w-full appearance-none placeholder-[#3A3B3C]"
           >
-            <option value={item}>
+            <option value={"price"}>
               Price Ascending
             </option>
-            <option value={item}>
+            <option value={"-price"}>
               Price Descending
             </option>
-            <option value={item}>
-              Brand Ascending
+            <option value={"rating"}>
+              Rating Ascending
             </option>
-            <option value={item}>
-              Brand Descending
+            <option value={"-rating"}>
+              Rating Descending
             </option>
           </select>
         </div>
