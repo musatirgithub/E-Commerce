@@ -1,8 +1,11 @@
 import { useState } from "react";
 
 const SearchSort = () => {
-  const [formData, setFormData] = useState();
-  const handleChange = ()=>{}
+  const [formData, setFormData] = useState({search:"", minprice:0, maxprice:0, minrating:0, maxrating:0, company:"ikea", sort:"price"});
+  const handleChange = (e)=>{
+    setFormData({...formData, [e.target.name]:e.target.value});
+    console.log(formData);
+  }
   const company = [
     "ikea",
     "maiden",
