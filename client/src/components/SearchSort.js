@@ -16,7 +16,7 @@ const SearchSort = () => {
     "kitchenaid",
   ];
   return (
-    <section>
+    <section className="flex justify-center py-5">
       <form className="flex gap-3">
         <div className="flex flex-col gap-3">
           <label htmlFor="search" className="text-[#EEEDE8]">
