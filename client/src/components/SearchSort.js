@@ -17,7 +17,7 @@ const SearchSort = () => {
   ];
   return (
     <section>
-      <form>
+      <form className="flex gap-3">
         <div className="flex flex-col gap-3">
           <label htmlFor="search" className="text-[#EEEDE8]">
             Search
@@ -30,10 +30,10 @@ const SearchSort = () => {
             value={formData.name}
             onChange={handleChange}
             placeholder="Enter name..."
-            className="bg-[#D9C6A7] text-[#0D1732] focus:outline-none border border-gray-300 rounded py-2 px-4 block w-full appearance-none placeholder-[#3A3B3C]"
+            className="bg-[#D9C6A7] text-[#0D1732] focus:outline-none border border-gray-300 rounded py-2 px-4 block w-[21rem] appearance-none placeholder-[#3A3B3C]"
           />
         </div>
-        <div>
+        <div className="flex flex-col gap-3"> 
           <label htmlFor="minprice" className="text-[#EEEDE8]">
             Min Price
           </label>
@@ -45,10 +45,10 @@ const SearchSort = () => {
             value={formData.minprice}
             onChange={handleChange}
             placeholder="Enter price..."
-            className="bg-[#D9C6A7] text-[#0D1732] focus:outline-none border border-gray-300 rounded py-2 px-4 block w-full appearance-none placeholder-[#3A3B3C]"
+            className="bg-[#D9C6A7] text-[#0D1732] focus:outline-none border border-gray-300 rounded py-2 px-4 block w-[10.5rem] appearance-none placeholder-[#3A3B3C]"
           />
         </div>
-        <div>
+        <div className="flex flex-col gap-3">
           <label htmlFor="maxprice" className="text-[#EEEDE8]">
             Max Price
           </label>
@@ -60,10 +60,10 @@ const SearchSort = () => {
             value={formData.maxprice}
             onChange={handleChange}
             placeholder="Enter price..."
-            className="bg-[#D9C6A7] text-[#0D1732] focus:outline-none border border-gray-300 rounded py-2 px-4 block w-full appearance-none placeholder-[#3A3B3C]"
+            className="bg-[#D9C6A7] text-[#0D1732] focus:outline-none border border-gray-300 rounded py-2 px-4 block w-[10.5rem] appearance-none placeholder-[#3A3B3C]"
           />
         </div>
-        <div>
+        <div className="flex flex-col gap-3">
           <label htmlFor="minrating" className="text-[#EEEDE8]">
             Min Rating
           </label>
@@ -75,10 +75,10 @@ const SearchSort = () => {
             value={formData.minrating}
             onChange={handleChange}
             placeholder="Enter price..."
-            className="bg-[#D9C6A7] text-[#0D1732] focus:outline-none border border-gray-300 rounded py-2 px-4 block w-full appearance-none placeholder-[#3A3B3C]"
+            className="bg-[#D9C6A7] text-[#0D1732] focus:outline-none border border-gray-300 rounded py-2 px-4 block w-[10.5rem] appearance-none placeholder-[#3A3B3C]"
           />
         </div>
-        <div>
+        <div className="flex flex-col gap-3">
           <label htmlFor="maxrating" className="text-[#EEEDE8]">
             Max Rating
           </label>
@@ -90,7 +90,7 @@ const SearchSort = () => {
             value={formData.maxrating}
             onChange={handleChange}
             placeholder="Enter price..."
-            className="bg-[#D9C6A7] text-[#0D1732] focus:outline-none border border-gray-300 rounded py-2 px-4 block w-full appearance-none placeholder-[#3A3B3C]"
+            className="bg-[#D9C6A7] text-[#0D1732] focus:outline-none border border-gray-300 rounded py-2 px-4 block w-[10.5rem] appearance-none placeholder-[#3A3B3C]"
           />
         </div>
         <div className="flex flex-col gap-3">
@@ -102,7 +102,7 @@ const SearchSort = () => {
             id="company"
             value={formData.company}
             onChange={handleChange}
-            className="bg-[#D9C6A7] text-[#0D1732] focus:outline-none border border-gray-300 rounded py-2 px-4 block w-full appearance-none placeholder-[#3A3B3C]"
+            className="bg-[#D9C6A7] text-[#0D1732] focus:outline-none border border-gray-300 rounded py-2 px-4 block w-[10.5rem] appearance-none placeholder-[#3A3B3C]"
           >
             {company.map((item, index) => {
               return (
@@ -115,14 +115,14 @@ const SearchSort = () => {
         </div>
         <div className="flex flex-col gap-3">
           <label htmlFor="sort" className="text-[#EEEDE8]">
-            Company
+            Sort
           </label>
           <select
             name="sort"
             id="sort"
             value={formData.sort}
             onChange={handleChange}
-            className="bg-[#D9C6A7] text-[#0D1732] focus:outline-none border border-gray-300 rounded py-2 px-4 block w-full appearance-none placeholder-[#3A3B3C]"
+            className="bg-[#D9C6A7] text-[#0D1732] focus:outline-none border border-gray-300 rounded py-2 px-4 block w-[10.5rem] appearance-none placeholder-[#3A3B3C]"
           >
             <option value={"price"}>
               Price Ascending
