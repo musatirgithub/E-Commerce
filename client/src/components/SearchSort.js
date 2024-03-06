@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 const SearchSort = () => {
-  const [formData, setFormData] = useState({search:"", minprice:0, maxprice:0, minrating:0, maxrating:0, company:"ikea", sort:"price"});
+  const [formData, setFormData] = useState({search:"", minprice:0, maxprice:100, minrating:1, maxrating:5, company:"ikea", sort:"price"});
   const handleChange = (e)=>{
     setFormData({...formData, [e.target.name]:e.target.value});
     console.log(formData);
@@ -29,7 +29,7 @@ const SearchSort = () => {
             required
             value={formData.name}
             onChange={handleChange}
-            placeholder="Enter name..."
+            placeholder="Enter product name..."
             className="bg-[#D9C6A7] text-[#0D1732] focus:outline-none border border-gray-300 rounded py-2 px-4 block w-[21rem] appearance-none placeholder-[#3A3B3C]"
           />
         </div>
