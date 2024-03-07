@@ -7,6 +7,8 @@ const productSlice = createSlice({
     loading: true,
     error: false,
     products: null,
+    minPrice:null,
+    maxPrice:null,
     product: null,
     isModalOpen:false,
     isSidebarOpen: false,
@@ -24,6 +26,14 @@ const productSlice = createSlice({
     getProductsSuccess: (state, { payload }) => {
       state.loading = false;
       state.products = payload;
+      let minPrice = 1000000;
+      let maxPrice = 0;
+      state.products.forEach((item) => {
+        if(item.price < minPrice){minPrice = item.price};
+        if(item.price > maxPrice){maxPrice = item.price};
+      });
+      state.minPrice = minPrice;
+      state.maxPrice = maxPrice;
     },
     getSingleProductSuccess: (state, { payload }) => {
       state.loading = false;

@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 const SearchSort = () => {
-  const [formData, setFormData] = useState({search:"", minprice:0, maxprice:100, minrating:1, maxrating:5, company:"ikea", sort:"price"});
+  const {minPrice, maxPrice} = useSelector((state)=>state.product);
+  const [formData, setFormData] = useState({search:"", minprice:minPrice/100, maxprice:maxPrice/100, minrating:1, maxrating:5, company:"ikea", sort:"price"});
   const handleChange = (e)=>{
     setFormData({...formData, [e.target.name]:e.target.value});
     console.log(formData);
