@@ -39,7 +39,7 @@ const TaskList = () => {
     );
   }
   return (
-    <div className="flex flex-wrap gap-5">
+    <div className="flex flex-wrap gap-5 px-16 ">
       {products?.map((product, index) => {
         return (
           <div
