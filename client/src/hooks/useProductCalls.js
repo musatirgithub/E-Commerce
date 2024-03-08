@@ -24,10 +24,10 @@ const useProductCalls = () => {
   //     dispatch(fetchFail());
   //   }
   // };
-  const getProducts = async () => {
+  const getAllProducts = async () => {
     dispatch(fetchStart());
     try {
-      const { data } = await axiosPublic.get("/api/v1/product/", {withCredentials:'include'});
+      const { data } = await axiosPublic.get("/api/v1/product/all-products", {withCredentials:'include'});
       dispatch(getProductsSuccess(data.products));
     } catch (err) {
       dispatch(fetchFail());
@@ -43,7 +43,7 @@ const useProductCalls = () => {
     try {
       const {data} = await axiosPublic.post(`/api/v1/product/`, taskInfo, {withCredentials:'include'});
       toastSuccessNotify(data.msg)
-      await getProducts();
+      await getAllProducts();
     } catch (err) {
       dispatch(fetchFail());
       toastErrorNotify(err.response.data.msg);
@@ -54,7 +54,7 @@ const useProductCalls = () => {
     try {
       const {data} = await axiosPublic.delete(`/api/v1/product/${id}`, {withCredentials:'include'});
       toastSuccessNotify(data.msg)
-      await getProducts();
+      await getAllProducts();
     } catch (err) {
       dispatch(fetchFail());
       toastErrorNotify(err.response.data.msg);
@@ -76,7 +76,7 @@ const useProductCalls = () => {
       const {data} = await axiosPublic.patch(`/api/v1/product/${id}`, productInfo, {withCredentials:'include'});
       getSingleProductSuccess(data.product);
       toastSuccessNotify(data.msg);
-      await getProducts();
+      await getAllProducts();
       await getProduct(id);
     } catch (err) {
       dispatch(fetchFail());
@@ -87,7 +87,7 @@ const useProductCalls = () => {
 
   return {
     // getAllTasks,
-    getProducts,
+    getAllProducts,
     createProduct,
     deleteProduct,
     getProduct,
