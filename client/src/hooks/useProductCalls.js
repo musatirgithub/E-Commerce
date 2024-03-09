@@ -38,6 +38,21 @@ const useProductCalls = () => {
       // }
     }
   };
+  const getProducts = async (formData) => {
+    const {search, minprice, maxprice, minrating, maxrating, company, sort} = formData
+    dispatch(fetchStart());
+    try {
+      const { data } = await axiosPublic.get(`/api/v1/product/?search=${search}&minprice=${minprice}&maxprice=${maxprice}&minrating=${minrating}&maxrating=${maxrating}&company=${company}&sort=${sort}`, {withCredentials:'include'});
+      dispatch(getProductsSuccess(data.products));
+    } catch (err) {
+      dispatch(fetchFail());
+      // if(err?.response?.status === 401){
+      //   dispatch(tokenTimeout());
+      //   toastErrorNotify("Login required!")
+      //     navigate('/login')
+      // }
+    }
+  };
   const createProduct = async (taskInfo) => {
     dispatch(fetchStart());
     try {
@@ -86,8 +101,8 @@ const useProductCalls = () => {
 
 
   return {
-    // getAllTasks,
     getAllProducts,
+    getProducts,
     createProduct,
     deleteProduct,
     getProduct,
