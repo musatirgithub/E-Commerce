@@ -11,7 +11,7 @@ const getAllProducts = async (req,res)=>{
 }
 
 const getProducts = async (req, res)=>{
-    const {featured, company, search:name, sort, fields, numericFilters} = req.query;
+    const {featured, company, search:name, sort, fields, minPrice, maxPrice, minRating, maxRating} = req.query;
 
     const queryObject = {};
 
@@ -24,32 +24,42 @@ const getProducts = async (req, res)=>{
     if (name){
         queryObject.name = {$regex:name, $options:'i'};
     }
-    if(numericFilters){
-        const operatorMap = {
-            '>':'$gt',
-            '>=':'$gte',
-            '=':'$eq',
-            '<':'$lt',
-            '<=':'$lte',
-        }
-        const regEx = /\b(<|<=|=|>|>=)\b/g
-        let filter = numericFilters.replace(regEx, (match)=>`-${operatorMap[match]}-`)
-        const options = ['price', 'rating'];
-        filter.split(',').forEach((item)=>{
-            const [field , operator, value] = item.split('-');
-            if(options.includes(field)){
-            const [field , operator, value] = item.split('-');
-                queryObject[field] = {[operator]:Number(value)}
-            }
-        }) 
-        };
-    
-
+    // if(numericFilters){
+    //     const operatorMap = {
+    //         '>':'$gt',
+    //         '>=':'$gte',
+    //         '=':'$eq',
+    //         '<':'$lt',
+    //         '<=':'$lte',
+    //     }
+    //     const regEx = /\b(<|<=|=|>|>=)\b/g
+    //     let filter = numericFilters.replace(regEx, (match)=>`-${operatorMap[match]}-`)
+    //     const options = ['price', 'rating'];
+    //     filter.split(',').forEach((item)=>{
+    //         const [field , operator, value] = item.split('-');
+    //         if(options.includes(field)){
+    //         const [field , operator, value] = item.split('-');
+    //             queryObject[field] = {[operator]:Number(value)}
+    //         }
+    //     }) 
+    //     };
+    if(minPrice && maxPrice){
+        queryObject.price={$gte: minPrice, $lte: maxPrice}
+    }
+    if(minRating && maxRating){
+        queryObject.price={$gte: minRating, $lte: maxRating}
+    }
+        console.log(queryObject);
     let result = Product.find(queryObject);
 
+    // if (sort){
+    //     const sortList = sort.split(',').join(' ');
+    //     result = result.sort(sortList);
+    // }else{
+    //     result = result.sort('createdAt')
+    // }
     if (sort){
-        const sortList = sort.split(',').join(' ');
-        result = result.sort(sortList);
+        result = result.sort(sort);
     }else{
         result = result.sort('createdAt')
     }
