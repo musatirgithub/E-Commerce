@@ -1,13 +1,18 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import useProductCalls from "../hooks/useProductCalls";
 
 const SearchSort = () => {
+  const {getProducts} = useProductCalls();
   const {minPrice, maxPrice} = useSelector((state)=>state.product);
   const [formData, setFormData] = useState({search:"", minprice:minPrice/100, maxprice:maxPrice/100, minrating:1, maxrating:5, company:"ikea", sort:"price"});
   const handleChange = (e)=>{
     setFormData({...formData, [e.target.name]:e.target.value});
-    console.log(formData);
   }
+  const handleSubmit = (e)=>{
+    e.preventDefault();
+    getProducts(formData);
+  };
   const company = [
     "ikea",
     "maiden",
@@ -19,7 +24,7 @@ const SearchSort = () => {
   ];
   return (
     <section className="flex justify-center py-5">
-      <form className="flex gap-3">
+      <form className="flex gap-3" onSubmit={handleSubmit}>
         <div className="flex flex-col gap-3">
           <label htmlFor="search" className="text-[#EEEDE8]">
             Search
@@ -28,7 +33,6 @@ const SearchSort = () => {
             type="text"
             name="search"
             id="search"
-            required
             value={formData.name}
             onChange={handleChange}
             placeholder="Enter product name..."
@@ -140,8 +144,8 @@ const SearchSort = () => {
             </option>
           </select>
         </div>
-        <div>
-          <button type="submit"></button>
+        <div className="">
+          <button type="submit" className="btn">Search</button>
         </div>
       </form>
     </section>
