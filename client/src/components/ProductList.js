@@ -15,11 +15,11 @@ const TaskList = () => {
   const { products } = useSelector((state) => state.product);
 
   const [loading, setLoading] = useState(true);
-  const { getProducts, deleteProduct, getProduct } = useProductCalls();
+  const { getAllProducts, deleteProduct, getProduct } = useProductCalls();
 
   useEffect(() => {
     setLoading(true);
-    getProducts();
+    getAllProducts();
     setLoading(false);
   }, []);
 
