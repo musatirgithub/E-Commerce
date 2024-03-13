@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import useProductCalls from "../hooks/useProductCalls";
 
 const SearchSort = () => {
   const {getProducts} = useProductCalls();
   const {minPrice, maxPrice} = useSelector((state)=>state.product);
-  const [formData, setFormData] = useState({search:"", minprice:minPrice/100, maxprice:maxPrice/100, minrating:1, maxrating:5, company:"ikea", sort:"price"});
+  const [formData, setFormData] = useState({search:"", minprice:"", maxprice:"", minrating:1, maxrating:5, company:"all", sort:"price"});
   const handleChange = (e)=>{
     setFormData({...formData, [e.target.name]:e.target.value});
   }
@@ -13,16 +13,9 @@ const SearchSort = () => {
     e.preventDefault();
     getProducts(formData);
   };
-  
-  useEffect(() => {
-    setFormData(prevFormData => ({
-      ...prevFormData,
-      minprice: minPrice / 100,
-      maxprice: maxPrice / 100
-    }));
-  }, [minPrice, maxPrice]);
-  
+
   const company = [
+    "all",
     "ikea",
     "maiden",
     "eternity",
@@ -56,10 +49,9 @@ const SearchSort = () => {
             type="number"
             name="minprice"
             id="minprice"
-            required
             value={formData.minprice}
             onChange={handleChange}
-            placeholder="Enter price..."
+            placeholder="Enter min price..."
             className="bg-[#D9C6A7] text-[#0D1732] focus:outline-none border border-gray-300 rounded py-2 px-4 block w-[10.5rem] appearance-none placeholder-[#3A3B3C]"
           />
         </div>
@@ -71,10 +63,9 @@ const SearchSort = () => {
             type="number"
             name="maxprice"
             id="maxprice"
-            required
             value={formData.maxprice}
             onChange={handleChange}
-            placeholder="Enter price..."
+            placeholder="Enter max price..."
             className="bg-[#D9C6A7] text-[#0D1732] focus:outline-none border border-gray-300 rounded py-2 px-4 block w-[10.5rem] appearance-none placeholder-[#3A3B3C]"
           />
         </div>
@@ -86,10 +77,9 @@ const SearchSort = () => {
             type="number"
             name="minrating"
             id="minrating"
-            required
             value={formData.minrating}
             onChange={handleChange}
-            placeholder="Enter price..."
+            placeholder="Enter min rating..."
             className="bg-[#D9C6A7] text-[#0D1732] focus:outline-none border border-gray-300 rounded py-2 px-4 block w-[10.5rem] appearance-none placeholder-[#3A3B3C]"
           />
         </div>
@@ -101,10 +91,9 @@ const SearchSort = () => {
             type="number"
             name="maxrating"
             id="maxrating"
-            required
             value={formData.maxrating}
             onChange={handleChange}
-            placeholder="Enter price..."
+            placeholder="Enter max rating..."
             className="bg-[#D9C6A7] text-[#0D1732] focus:outline-none border border-gray-300 rounded py-2 px-4 block w-[10.5rem] appearance-none placeholder-[#3A3B3C]"
           />
         </div>
