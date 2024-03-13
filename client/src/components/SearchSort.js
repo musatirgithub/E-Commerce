@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import useProductCalls from "../hooks/useProductCalls";
 
@@ -13,6 +13,15 @@ const SearchSort = () => {
     e.preventDefault();
     getProducts(formData);
   };
+  
+  useEffect(() => {
+    setFormData(prevFormData => ({
+      ...prevFormData,
+      minprice: minPrice / 100,
+      maxprice: maxPrice / 100
+    }));
+  }, [minPrice, maxPrice]);
+  
   const company = [
     "ikea",
     "maiden",
