@@ -18,7 +18,7 @@ const getProducts = async (req, res)=>{
     if (featured){
         queryObject.featured = featured === 'true' ? true : false;
     }
-    if (company){
+    if (company && company !== "all"){
         queryObject.company = company;
     }
     if (name){
