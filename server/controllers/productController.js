@@ -43,8 +43,17 @@ const getProducts = async (req, res)=>{
     //         }
     //     }) 
     //     };
-    if(minPrice && maxPrice){
-        queryObject.price={$gte: Number(minPrice*100), $lte: Number(maxPrice*100)}
+    // if(minPrice && maxPrice){
+    //     queryObject.price={$gte: Number(minPrice*100), $lte: Number(maxPrice*100)}
+    // }
+    if(minPrice || maxPrice){
+        if(minPrice && maxPrice){
+            queryObject.price={$gte: Number(minPrice*100), $lte: Number(maxPrice*100)}
+        }else if (minPrice){
+            queryObject.price={$gte: Number(minPrice*100)}
+        }else if(maxPrice){
+            queryObject.price={$lte: Number(maxPrice*100)}
+        }
     }
     // if(minRating && maxRating){
     //     queryObject.rating={$gte: Number(minRating), $lte: Number(maxRating)}
