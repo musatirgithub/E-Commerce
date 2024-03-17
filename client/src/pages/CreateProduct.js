@@ -1,5 +1,6 @@
 import { useState } from "react";
 import useProductCalls from "../hooks/useProductCalls";
+import { useSelector } from "react-redux";
 
 const category = ['office', 'kitchen', 'bedroom', 'electronics', 'accessories'];
 
@@ -7,26 +8,25 @@ const company = ['ikea', 'maiden', 'eternity', 'lumens', 'sony', 'bose', 'kitche
 
 
 const CreateProduct = () => {
-  const {createProduct} = useProductCalls();
-  const [userInfo, setUserInfo] = useState({name:'', price:0, description:'', image:'', category:'', company:'', inventory:0, featured:false, freeShipping:false});
+  const {imageAddress} = useSelector((state)=>state.product)
+  const {uploadImage, createProduct} = useProductCalls();
+  const [userInfo, setUserInfo] = useState({name:'', price:0, description:'', image:'', category:'office', company:'ikea', inventory:0, featured:false, freeShipping:false});
   const [file, setFile] = useState(null);
 
   const handleChange = (e)=>{
     setUserInfo({...userInfo, [e.target.name]:e.target.value})
-
   }
-
   const handleFileChange = (e)=>{
     setFile(e.target.files[0])
-    
   }
-  console.log(file);
   const handleSubmit = (e)=>{
     e.preventDefault();
     const formData = new FormData();
     formData.append('image', file);
-    createProduct(userInfo);
-    // setUserInfo({name:'', price:0, description:'', image:'', category:'', company:'', inventory:0, featured:false, freeShipping:false});
+    uploadImage(formData);
+    if(imageAddress){
+      createProduct({...userInfo, image:imageAddress});
+    }
     }
 
   return (
