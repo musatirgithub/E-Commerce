@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useProductCalls from "../hooks/useProductCalls";
 import { useSelector } from "react-redux";
 
@@ -24,10 +24,13 @@ const CreateProduct = () => {
     const formData = new FormData();
     formData.append('image', file);
     uploadImage(formData);
-    if(imageAddress){
-      createProduct({...userInfo, image:imageAddress});
     }
-    }
+
+    useEffect(()=>{
+      if(imageAddress){
+        createProduct({...userInfo, image:imageAddress});
+      }
+    },[imageAddress])
 
   return (
     <main className="flex justify-evenly items-center bg-[#0D1732] min-h-[calc(100vh-8rem)]">
