@@ -47,7 +47,7 @@ const TaskList = () => {
             className={""}
             onClick={() => handleClick(product._id)}
           >
-            <div className="w-[21rem] h-[21rem] object-cover object-center rounded-t-lg ">
+            <div className="w-[21rem] h-[21rem] object-cover object-center rounded-t-lg overflow-hidden">
               <img src={product.image} className="" />
             </div>
             <div className="text-white rounded-b-lg">
