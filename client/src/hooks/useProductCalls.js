@@ -1,10 +1,11 @@
 // import { axiosWithToken } from "../service/axiosInstance";
 import { useDispatch } from "react-redux";
-import {tokenTimeout} from "../features/authSlice";
 import {
   fetchStart,
   getProductsSuccess,
   getSingleProductSuccess,
+  imageUpload,
+  imageUploadFail,
   fetchFail,
 } from "../features/productSlice";
 import {axiosPublic} from "../utils/axiosPublic";
@@ -15,15 +16,6 @@ const useProductCalls = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // const getAllProducts = async () => {
-  //   dispatch(fetchStart());
-  //   try {
-  //     const { data } = await axiosPublic.get("/api/v1/task/all-tasks", {withCredentials:'include'});
-  //     dispatch(getProductsSuccess(data.products));
-  //   } catch (err) {
-  //     dispatch(fetchFail());
-  //   }
-  // };
   const getAllProducts = async () => {
     dispatch(fetchStart());
     try {
@@ -31,11 +23,6 @@ const useProductCalls = () => {
       dispatch(getProductsSuccess(data.products));
     } catch (err) {
       dispatch(fetchFail());
-      // if(err?.response?.status === 401){
-      //   dispatch(tokenTimeout());
-      //   toastErrorNotify("Login required!")
-      //     navigate('/login')
-      // }
     }
   };
   const getProducts = async (formData) => {
@@ -46,13 +33,18 @@ const useProductCalls = () => {
       dispatch(getProductsSuccess(data.products));
     } catch (err) {
       dispatch(fetchFail());
-      // if(err?.response?.status === 401){
-      //   dispatch(tokenTimeout());
-      //   toastErrorNotify("Login required!")
-      //     navigate('/login')
-      // }
     }
   };
+  const uploadImage = async (formData) => {
+    try {
+      const { data } = await axiosPublic.post(`/api/v1/product/upload-image`, formData, {withCredentials:'include'});
+      dispatch(imageUpload(data.image.src));
+    } catch (err) {
+      dispatch(imageUploadFail());
+      toastErrorNotify(err.response.data.msg);
+    }
+  };
+  
   const createProduct = async (taskInfo) => {
     dispatch(fetchStart());
     try {
@@ -103,6 +95,7 @@ const useProductCalls = () => {
   return {
     getAllProducts,
     getProducts,
+    uploadImage,
     createProduct,
     deleteProduct,
     getProduct,
