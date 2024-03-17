@@ -12,16 +12,21 @@ const productSlice = createSlice({
     product: null,
     isModalOpen:false,
     isSidebarOpen: false,
+    imageAddress:null,
   },
   reducers: {
     fetchStart: (state) => {
       state.loading = true;
       state.error = false;
     },
-    // getSuccess: (state, { payload: { data, url } }) => {
-    //   state.loading = false;
-    //   state[url] = data;
-    // },
+
+    imageUpload:(state, {payload})=>{
+      state.imageAddress = payload;
+    },
+    imageUploadFail:(state)=>{
+      state.imageAddress = null;
+      console.log("image upload failed");
+    },
 
     getProductsSuccess: (state, { payload }) => {
       state.loading = false;
@@ -63,6 +68,8 @@ export const {
   fetchStart,
   getProductsSuccess,
   getSingleProductSuccess,
+  imageUpload,
+  imageUploadFail,
   fetchFail,
   openModal,
   closeModal,
