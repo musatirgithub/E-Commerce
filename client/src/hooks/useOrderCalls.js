@@ -7,6 +7,8 @@ import {
   getSingleOrderSuccess,
   fetchFail,
   setClientSecret,
+  isOrderedByUserSuccess,
+  isOrderedByUserFail,
 } from "../features/orderSlice";
 import { axiosPublic } from "../utils/axiosPublic";
 import { useNavigate } from "react-router-dom";
@@ -87,7 +89,7 @@ const useOrderCalls = () => {
         orderInfo,
         { withCredentials: "include" }
       );
-      getSingleOrderSuccess(data.order);
+      dispatch(getSingleOrderSuccess(data.order));
       toastSuccessNotify(data.msg);
       await getOrders();
       await getOrder(id);
@@ -96,6 +98,23 @@ const useOrderCalls = () => {
       toastErrorNotify(err.response.data.msg);
     }
   };
+
+  const isProductOrdered = async (id)=>{
+    dispatch(fetchStart());
+    try {
+      const { data } = await axiosPublic.get(
+        `/api/v1/order/check-if-ordered/${id}`,
+        { withCredentials: "include" }
+      );
+      if(data.ordered){
+        dispatch(isOrderedByUserSuccess());
+      }else {
+        dispatch(isOrderedByUserFail());
+      };
+    } catch (err) {
+        toastErrorNotify(err.response.data.msg);
+    }
+  }
 
 
   return {
