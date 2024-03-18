@@ -135,6 +135,22 @@ const createPaymentIntent = async (req, res) => {
   }
 };
 
+const checkIfUserOrderedProduct = async (req,res)=>{
+  const {id} = req.params;
+  const orders = await Order.find({ user: req.user.userId })
+  let ordered = false;
+  orders.forEach((item)=>{
+    const {orderItems} = item;
+    orderItems.forEach((orderItem)=>{
+      if(orderItem.product === id){
+        ordered = true;
+        res.status(StatusCodes.OK).json({ordered});
+      }
+    })
+  })
+  res.status(StatusCodes.OK).json({ordered});
+}
+
 module.exports = {
   getAllOrders,
   getUserOrders,
