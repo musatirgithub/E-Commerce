@@ -17,6 +17,7 @@ const orderSlice = createSlice({
     tax: 0,
     orderTotal: 0,
     clientSecret:null,
+    isOrderedByUser:null,
   },
   reducers: {
     fetchStart: (state) => {
@@ -125,6 +126,12 @@ const orderSlice = createSlice({
       state.loading = false;
       state.error = true;
     },
+    isOrderedByUserSuccess:(state)=>{
+      state.isOrderedByUser = true;
+    },
+    isOrderedByUserFail:(state)=>{
+      state.isOrderedByUser = false;
+    },
   },
 });
 
@@ -140,5 +147,7 @@ export const {
   decreaseCartItem,
   addAddress,
   setClientSecret,
+  isOrderedByUserSuccess,
+  isOrderedByUserFail,
 } = orderSlice.actions;
 export default orderSlice.reducer;
