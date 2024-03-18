@@ -160,4 +160,5 @@ module.exports = {
   getOrder,
   config,
   createPaymentIntent,
+  checkIfUserOrderedProduct,
 };
