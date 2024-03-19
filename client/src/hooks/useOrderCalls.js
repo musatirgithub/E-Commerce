@@ -124,6 +124,7 @@ const useOrderCalls = () => {
     deleteOrder,
     getOrder,
     updateOrder,
+    isProductOrdered,
   };
 };
 
