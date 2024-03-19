@@ -140,11 +140,10 @@ const checkIfUserOrderedProduct = async (req,res)=>{
   const orders = await Order.find({ user: req.user.userId })
   let ordered = false;
   orders.forEach((item)=>{
-    const {orderItems} = item;
-    orderItems.forEach((orderItem)=>{
-      if(orderItem.product === id){
+    item.orderItems.forEach((orderItem)=>{
+      const productId = orderItem.product.toString();
+      if(productId === id){
         ordered = true;
-        res.status(StatusCodes.OK).json({ordered});
       }
     })
   })
