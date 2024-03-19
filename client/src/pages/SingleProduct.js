@@ -3,13 +3,16 @@ import useProductCalls from "../hooks/useProductCalls";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import {addCartItem, removeCartItem} from "../features/orderSlice";
+import {addCartItem} from "../features/orderSlice";
 import { formatPrice } from "../utils/formatPrice";
+import useOrderCalls from "../hooks/useOrderCalls";
 
 const SingleProduct = () => {
     const dispatch = useDispatch();
     const {getProduct} = useProductCalls();
+    const {isProductOrdered} = useOrderCalls();
     const {product} = useSelector((state)=>state.product);
+    const {isOrderedByUser} = useSelector((state)=>state.order);
     const navigate = useNavigate();
     const {id} = useParams();
     const [loading, setLoading] = useState(false);
@@ -42,8 +45,10 @@ const SingleProduct = () => {
     useEffect(() => {
         setLoading(true);
         getProduct(id);
+        isProductOrdered(id);
         setLoading(false);
-    }, []);
+    }, [isOrderedByUser]);
+    console.log("isOrderedByUser:", isOrderedByUser);
     if(loading){
         return <div>
                 <div>...Loading</div>
