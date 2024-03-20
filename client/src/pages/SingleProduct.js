@@ -6,10 +6,12 @@ import { useDispatch } from "react-redux";
 import {addCartItem} from "../features/orderSlice";
 import { formatPrice } from "../utils/formatPrice";
 import useOrderCalls from "../hooks/useOrderCalls";
+import WriteComment from "../components/WriteComment";
 
 const SingleProduct = () => {
     const dispatch = useDispatch();
     const {getProduct} = useProductCalls();
+    // isProductOrdered function checks whether user ordered this product or not
     const {isProductOrdered} = useOrderCalls();
     const {product} = useSelector((state)=>state.product);
     const {isOrderedByUser} = useSelector((state)=>state.order);
@@ -17,6 +19,7 @@ const SingleProduct = () => {
     const {id} = useParams();
     const [loading, setLoading] = useState(false);
     const [amount, setAmount] = useState(1);
+    const [isCommentOpen, setIsCommentOpen] = useState(false);
 
     const handleIncrease = ()=>{
         if(amount<product?.inventory){
@@ -48,7 +51,6 @@ const SingleProduct = () => {
         isProductOrdered(id);
         setLoading(false);
     }, [isOrderedByUser]);
-    console.log("isOrderedByUser:", isOrderedByUser);
     if(loading){
         return <div>
                 <div>...Loading</div>
@@ -62,13 +64,6 @@ const SingleProduct = () => {
                 <img src={product?.image} alt={product?.name}/>
             </div>
             <p className=" text-3xl font-bold capitalize text-center py-3">{product?.name}</p>
-            <div className="ps-3 flex flex-row gap-2">
-            <p className=" text-md font-bold capitalize text-center py-3">Average Rating </p>
-            <div className=" min-w-[2rem] bg-red-800 text-white rounded-md flex justify-center items-center">
-            <p className=" font-bold text-xl ">{product?.averageRating}</p>
-            </div>
-            <p className=" text-md font-semibold lowercase text-center py-3">({product?.numOfReviews} customer reviews)</p>
-            </div>
             <p className="ps-3 text-lg font-bold text-amber-800">{formatPrice(product?.price)}</p>
             <p className="ps-3 text-lg font-semibold underline">Description:</p>
             <p className="ps-3 text-lg">{product?.description}</p>
@@ -80,6 +75,15 @@ const SingleProduct = () => {
                 <p className="w-[6rem] font-semibold">Brand:</p>
                 <p className="capitalize">{product?.company}</p>
             </div>
+            <div className="ps-3 flex flex-row gap-2">
+            <p className=" text-md font-bold capitalize text-center py-3">Average Rating </p>
+            <div className=" min-w-[2rem] bg-red-800 text-white rounded-md flex justify-center items-center">
+            <p className=" font-bold text-xl ">{product?.averageRating}</p>
+            </div>
+            <p className=" text-md font-semibold lowercase text-center py-3">({product?.numOfReviews} customer reviews)</p>
+            </div>
+            {isOrderedByUser && <button className="btn btn-warning " onClick={()=>setIsCommentOpen(!isCommentOpen)}>Write a comment</button>}
+            {isCommentOpen && <WriteComment/>}
             <div className="underline w-[15rem] mx-auto"></div>
             <div className="my-[2rem] flex justify-center gap-3">
                 <div className="min-w-[2rem] bg-gray-300 text-black text-center text-3xl font-bold rounded-md" onClick={handleDecrease}>-</div>
