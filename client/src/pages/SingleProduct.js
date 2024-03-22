@@ -82,7 +82,7 @@ const SingleProduct = () => {
             </div>
             <p className=" text-md font-semibold lowercase text-center py-3">({product?.numOfReviews} customer reviews)</p>
             </div>
-            {isOrderedByUser && <button className="btn btn-warning " onClick={()=>setIsCommentOpen(!isCommentOpen)}>Write a comment</button>}
+            {isOrderedByUser && <button className="btn btn-warning " onClick={()=>setIsCommentOpen(!isCommentOpen)}>Write a review</button>}
             {isCommentOpen && <WriteComment id={id}/>}
             <div className="underline w-[15rem] mx-auto"></div>
             <div className="my-[2rem] flex justify-center gap-3">
