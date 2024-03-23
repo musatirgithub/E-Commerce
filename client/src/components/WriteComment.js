@@ -2,7 +2,7 @@ import { useState } from "react";
 import useReviewCalls from "../hooks/useReviewCalls";
 
 const WriteComment = ({id}) => {
-  const {createReview}=useReviewCalls();
+  const {createReview, getReviews}=useReviewCalls();
   const [commentData, setCommentData] = useState({ rating: 5 });
   const handleChange = (e) => {
     setCommentData({ ...commentData, [e.target.name]: e.target.value });
