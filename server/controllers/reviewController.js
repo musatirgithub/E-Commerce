@@ -54,10 +54,10 @@ const updateReview = async (req, res) => {
   res.status(StatusCodes.OK).json({ msg: "Success! Review updated." });
 };
 const getReview = async (req, res) => {
-  const { id: reviewId } = req.params;
-  const review = await Review.findOne({ _id: reviewId });
+  const { id: productId } = req.params;
+  const review = await Review.findOne({ user:req.user.userId, product: productId});
   if (!review) {
-    throw new CustomError.NotFoundError(`No review with ID: ${reviewId}`);
+    throw new CustomError.NotFoundError(`No review with ID: ${productId}`);
   }
   checkPermissions(req.user, review.user);
   res.status(StatusCodes.OK).json({ review });
