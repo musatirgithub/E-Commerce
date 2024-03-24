@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import useReviewCalls from "../hooks/useReviewCalls";
 
 const WriteComment = ({id}) => {
-  const {createReview, getReviews}=useReviewCalls();
+  const {createReview, getReview}=useReviewCalls();
+  const {review} = useSelector((state)=>state.review);
   const [commentData, setCommentData] = useState({ rating: 5 });
   const handleChange = (e) => {
     setCommentData({ ...commentData, [e.target.name]: e.target.value });
@@ -11,6 +13,11 @@ const WriteComment = ({id}) => {
     e.preventDefault();
     createReview({...commentData, product:id});
   }
+
+  useEffect(()=>{
+    getReview(id);
+  },[])
+
   return (
     <section>
       <form onSubmit={handleSubmit}>
