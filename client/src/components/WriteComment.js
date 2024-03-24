@@ -5,7 +5,7 @@ import useReviewCalls from "../hooks/useReviewCalls";
 const WriteComment = ({id}) => {
   const {createReview, getReview}=useReviewCalls();
   const {review} = useSelector((state)=>state.review);
-  const [commentData, setCommentData] = useState({ rating: 5 });
+  const [commentData, setCommentData] = useState({ rating: 5, title:"", comment:"" });
   const handleChange = (e) => {
     setCommentData({ ...commentData, [e.target.name]: e.target.value });
   };
@@ -16,8 +16,7 @@ const WriteComment = ({id}) => {
 
   useEffect(()=>{
     getReview(id);
-  },[])
-
+  },[]);
   return (
     <section>
       <form onSubmit={handleSubmit}>
