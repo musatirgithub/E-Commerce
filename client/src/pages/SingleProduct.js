@@ -7,14 +7,17 @@ import {addCartItem} from "../features/orderSlice";
 import { formatPrice } from "../utils/formatPrice";
 import useOrderCalls from "../hooks/useOrderCalls";
 import WriteComment from "../components/WriteComment";
+import useReviewCalls from "../hooks/useReviewCalls";
 
 const SingleProduct = () => {
     const dispatch = useDispatch();
     const {getProduct} = useProductCalls();
+    const {getReview} = useReviewCalls();
     // isProductOrdered function checks whether user ordered this product or not
     const {isProductOrdered} = useOrderCalls();
     const {product} = useSelector((state)=>state.product);
     const {isOrderedByUser} = useSelector((state)=>state.order);
+    const {review} = useSelector((state)=>state.review);
     const navigate = useNavigate();
     const {id} = useParams();
     const [loading, setLoading] = useState(false);
@@ -49,6 +52,7 @@ const SingleProduct = () => {
         setLoading(true);
         getProduct(id);
         isProductOrdered(id);
+        getReview(id);
         setLoading(false);
     }, [isOrderedByUser]);
     if(loading){
@@ -82,7 +86,7 @@ const SingleProduct = () => {
             </div>
             <p className=" text-md font-semibold lowercase text-center py-3">({product?.numOfReviews} customer reviews)</p>
             </div>
-            {isOrderedByUser && <button className="btn btn-warning " onClick={()=>setIsCommentOpen(!isCommentOpen)}>Write a review</button>}
+            {isOrderedByUser && <button className="btn btn-warning " onClick={()=>setIsCommentOpen(!isCommentOpen)}>{review?"Update review":"Write review"}</button>}
             {isCommentOpen && <WriteComment id={id}/>}
             <div className="underline w-[15rem] mx-auto"></div>
             <div className="my-[2rem] flex justify-center gap-3">
