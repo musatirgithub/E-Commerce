@@ -3,15 +3,20 @@ import { useSelector } from "react-redux";
 import useReviewCalls from "../hooks/useReviewCalls";
 
 const WriteComment = ({id}) => {
-  const {createReview, getReview}=useReviewCalls();
+  const {createReview, getReview, updateReview}=useReviewCalls();
   const {review} = useSelector((state)=>state.review);
-  const [commentData, setCommentData] = useState({ rating: 5, title:"", comment:"" });
+  const [commentData, setCommentData] = useState(review ? { rating: review.rating, title:review.title, comment:review.comment }:{ rating: 5, title:"", comment:"" });
   const handleChange = (e) => {
     setCommentData({ ...commentData, [e.target.name]: e.target.value });
   };
   const handleSubmit = (e)=>{
     e.preventDefault();
-    createReview({...commentData, product:id});
+    if(!review){
+      createReview({...commentData, product:id});
+    }
+    if(review){
+      updateReview({...commentData}, id);
+    }
   }
 
   useEffect(()=>{
@@ -61,7 +66,7 @@ const WriteComment = ({id}) => {
           />
         </div>
         <div className="">
-          <button type="submit" className="btn">Submit Review</button>
+          {review? <button type="submit" className="btn">Edit Review</button>:<button type="submit" className="btn">Submit Review</button>}
         </div>
       </form>
     </section>
