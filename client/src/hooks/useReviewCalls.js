@@ -87,7 +87,7 @@ const useReviewCalls = () => {
       getSingleReviewSuccess(data.review);
       toastSuccessNotify(data.msg);
       await getReviews();
-      await getReview(id);
+      await getReview(reviewInfo.product);
     } catch (err) {
       dispatch(fetchFail());
       toastErrorNotify(err.response.data.msg);
