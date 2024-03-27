@@ -15,7 +15,7 @@ const WriteComment = ({id}) => {
       createReview({...commentData, product:id});
     }
     if(review){
-      updateReview({...commentData}, review._id);
+      updateReview({...commentData, product:id}, review._id);
     }
   }
 
