@@ -42,15 +42,16 @@ const deleteReview = async (req, res) => {
 };
 const updateReview = async (req, res) => {
   const { id: reviewId } = req.params;
-  const review = await Review.findOneAndUpdate({ _id: reviewId }, req.body, {
-    new: true,
-    runValidators: true,
-  });
-  if (!review) {
+  const {rating, title, comment, product} = req.body;
+  const review = await Review.findOne({_id:reviewId});
+    if (!review) {
     throw new CustomError.NotFoundError(`No review with ID: ${reviewId}`);
   }
-
   checkPermissions(req.user, review.user);
+  review.rating = rating;
+  review.title=title;
+  review.comment=comment;
+  await review.save();
   res.status(StatusCodes.OK).json({ msg: "Success! Review updated." });
 };
 const getReview = async (req, res) => {
