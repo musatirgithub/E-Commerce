@@ -8,6 +8,7 @@ import {
   getSingleReviewSuccess,
   fetchFail,
 } from "../features/reviewSlice";
+import useProductCalls from "./useProductCalls";
 import {axiosPublic} from "../utils/axiosPublic";
 import { useNavigate } from "react-router-dom";
 import { toastSuccessNotify, toastErrorNotify } from "../helper/ToastNotify";
@@ -15,6 +16,7 @@ import { toastSuccessNotify, toastErrorNotify } from "../helper/ToastNotify";
 const useReviewCalls = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const {getProduct} = useProductCalls();
 
   // const getAllProducts = async () => {
   //   dispatch(fetchStart());
@@ -88,6 +90,7 @@ const useReviewCalls = () => {
       toastSuccessNotify(data.msg);
       await getReviews();
       await getReview(reviewInfo.product);
+      await getProduct(reviewInfo.product);
     } catch (err) {
       dispatch(fetchFail());
       toastErrorNotify(err.response.data.msg);
