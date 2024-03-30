@@ -79,7 +79,6 @@ const useReviewCalls = () => {
       dispatch(getSingleReviewSuccess(data.review));
     } catch (err) {
       dispatch(fetchFail());
-      toastErrorNotify(err.response.data.msg);
     }
   };
   const updateReview = async (reviewInfo, id) => {
