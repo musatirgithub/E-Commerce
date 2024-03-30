@@ -14,7 +14,7 @@ const Login = () => {
   const handleSubmit = (e)=>{
     e.preventDefault();
     register(userInfo);
-    setUserInfo({email:'', password:''});
+    setUserInfo({name:'', email:'', password:''});
     }
 
   return (
@@ -28,17 +28,17 @@ const Login = () => {
       <section className="flex flex-col gap-3 ">
         <div className="flex flex-col gap-3">
       <label htmlFor="name" className="text-[#EEEDE8]">Name</label>
-      <input type="name" name="name" id="name" required value={userInfo.name} onChange={handleChange} placeholder="Enter name..."
+      <input type="name" name="name" id="name" required value={userInfo?.name} onChange={handleChange} placeholder="Enter name..."
        className="bg-[#D9C6A7] text-[#0D1732] focus:outline-none border border-gray-300 rounded py-2 px-4 block w-full appearance-none placeholder-[#3A3B3C]"/>
       </div>
       <div className="flex flex-col gap-3">
       <label htmlFor="email" className="text-[#EEEDE8]">Email</label>
-      <input type="email" name="email" id="email" required value={userInfo.email} onChange={handleChange} placeholder="Enter email..."
+      <input type="email" name="email" id="email" required value={userInfo?.email} onChange={handleChange} placeholder="Enter email..."
       className="bg-[#D9C6A7] text-[#0D1732] focus:outline-none border border-gray-300 rounded py-2 px-4 block w-full appearance-none placeholder-[#3A3B3C]"/>
       </div>
       <div className="flex flex-col gap-3">
       <label htmlFor="password" className="text-[#EEEDE8]">Password</label>
-      <input type="password" name="password" id="password" required value={userInfo.password} onChange={handleChange} placeholder="Enter password..."
+      <input type="password" name="password" id="password" required value={userInfo?.password} onChange={handleChange} placeholder="Enter password..."
       className="bg-[#D9C6A7] text-[#0D1732] focus:outline-none border border-gray-300 rounded py-2 px-4 block w-full appearance-none placeholder-[#3A3B3C]"/>
       </div>
       <h4 className="flex flex-col gap-3">
