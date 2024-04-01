@@ -32,6 +32,10 @@ const reviewSlice = createSlice({
       state.loading = false;
       state.review = payload;
     },
+    getSingleReviewFail: (state) => {
+      state.loading = false;
+      state.review = null;
+    },
 
     fetchFail: (state) => {
       state.loading = false;
@@ -45,6 +49,7 @@ export const {
   getReviewsSuccess,
   getUserReviewsSuccess,
   getSingleReviewSuccess,
+  getSingleReviewFail,
   fetchFail,
 } = reviewSlice.actions;
 export default reviewSlice.reducer;
