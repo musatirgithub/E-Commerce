@@ -6,6 +6,7 @@ import {
   getReviewsSuccess,
   getUserReviewsSuccess,
   getSingleReviewSuccess,
+  getSingleReviewFail,
   fetchFail,
 } from "../features/reviewSlice";
 import useProductCalls from "./useProductCalls";
@@ -34,11 +35,16 @@ const useReviewCalls = () => {
       dispatch(getReviewsSuccess(data.reviews));
     } catch (err) {
       dispatch(fetchFail());
-      // if(err?.response?.status === 401){
-      //   dispatch(tokenTimeout());
-      //   toastErrorNotify("Login required!")
-      //     navigate('/login')
-      // }
+
+    }
+  };
+  const getProductReviews = async (id) => {
+    dispatch(fetchStart());
+    try {
+      const { data } = await axiosPublic.get(`/api/v1/review/product-reviews/${id}`, {withCredentials:'include'});
+      dispatch(getReviewsSuccess(data.reviews));
+    } catch (err) {
+      dispatch(fetchFail());
     }
   };
   const getUserReviews = async () => {
@@ -55,7 +61,8 @@ const useReviewCalls = () => {
     try {
       const {data} = await axiosPublic.post(`/api/v1/review/`, reviewInfo, {withCredentials:'include'});
       toastSuccessNotify(data.msg)
-      // await getOrders();
+      await getReview(reviewInfo.product);
+      await getProduct(reviewInfo.product);
     } catch (err) {
       dispatch(fetchFail());
       toastErrorNotify(err.response.data.msg);
@@ -78,7 +85,7 @@ const useReviewCalls = () => {
       const {data} = await axiosPublic.get(`/api/v1/review/${id}`, {withCredentials:'include'});
       dispatch(getSingleReviewSuccess(data.review));
     } catch (err) {
-      dispatch(fetchFail());
+      dispatch(getSingleReviewFail());
     }
   };
   const updateReview = async (reviewInfo, id) => {
