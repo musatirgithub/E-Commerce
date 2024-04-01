@@ -60,8 +60,15 @@ const getReview = async (req, res) => {
   if (!review) {
     throw new CustomError.NotFoundError(`No review with ID: ${productId}`);
   }
-  checkPermissions(req.user, review.user);
   res.status(StatusCodes.OK).json({ review });
+};
+const getProductReviews = async (req, res) => {
+  const { id: productId } = req.params;
+  const reviews = await Review.find({ product: productId});
+  if (!reviews) {
+    throw new CustomError.NotFoundError(`No review with ID: ${productId}`);
+  }
+  res.status(StatusCodes.OK).json({ reviews });
 };
 
 module.exports = {
@@ -71,4 +78,5 @@ module.exports = {
   deleteReview,
   updateReview,
   getReview,
+  getProductReviews,
 };
