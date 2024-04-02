@@ -40,6 +40,7 @@ const reviewSlice = createSlice({
     fetchFail: (state) => {
       state.loading = false;
       state.error = true;
+      state.reviews = null;
     },
   },
 });
