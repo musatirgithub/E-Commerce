@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import useReviewCalls from "../hooks/useReviewCalls";
 
-const WriteComment = ({id}) => {
+const WriteComment = ({id, setIsCommentOpen}) => {
   const {createReview, getReview, updateReview}=useReviewCalls();
   const {review} = useSelector((state)=>state.review);
   const [commentData, setCommentData] = useState(review ? { rating: review.rating, title:review.title, comment:review.comment }:{ rating: 5, title:"", comment:"" });
@@ -17,6 +17,7 @@ const WriteComment = ({id}) => {
     if(review){
       updateReview({...commentData, product:id}, review._id);
     }
+    setIsCommentOpen(false)
   }
 
   useEffect(()=>{
