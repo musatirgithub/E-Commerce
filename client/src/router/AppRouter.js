@@ -14,6 +14,7 @@ import ForgotPassword from "../pages/ForgotPassword";
 import ForgotPasswordWarning from "../pages/ForgotPasswordWarning";
 import CreateProduct from "../pages/CreateProduct";
 import SingleProduct from "../pages/SingleProduct";
+import SingleProductReviews from "../pages/SingleProductReviews";
 import Checkout from "../pages/Checkout";
 import Cart from "../pages/Cart";
 import Payment from "../pages/Payment";
@@ -32,6 +33,7 @@ const AppRouter = ()=>{
                 <Route path="/create-product" element={<CreateProduct/>}/>
                 <Route path="/payment" element={<Payment />}/>
                 <Route path='/single-product/:id' element={<SingleProduct />}/>
+                <Route path='/single-product-reviews/:id' element={<SingleProductReviews />}/>
                 <Route path="/checkout" element={<Checkout/>}/>
                 <Route path="/completion" element={<Completion/>}/>
                 <Route path="/cart" element={<Cart/>}/>
