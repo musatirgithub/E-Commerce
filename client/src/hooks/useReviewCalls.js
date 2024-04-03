@@ -107,6 +107,7 @@ const useReviewCalls = () => {
   return {
     getReviews,
     getUserReviews,
+    getProductReviews,
     createReview,
     deleteReview,
     getReview,
