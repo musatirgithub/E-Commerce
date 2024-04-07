@@ -12,7 +12,7 @@ const getAllProducts = async (req,res)=>{
 
 const getProducts = async (req, res)=>{
     const {featured, company, search:name, sort, fields, minprice:minPrice, maxprice:maxPrice, minrating:minRating, maxrating:maxRating} = req.query;
-
+    console.log("minRating: ", minRating, "maxRating: ", maxRating);
     const queryObject = {};
 
     if (featured){
@@ -55,10 +55,15 @@ const getProducts = async (req, res)=>{
             queryObject.price={$lte: Number(maxPrice*100)}
         }
     }
-    // if(minRating && maxRating){
-    //     queryObject.rating={$gte: Number(minRating), $lte: Number(maxRating)}
-    // }
-        console.log(queryObject);
+    if(minRating || maxRating){
+        if(minRating && maxRating){
+            queryObject.averageRating={$gte: Number(minRating), $lte: Number(maxRating)}
+        }else if (minRating){
+            queryObject.averageRating={$gte: Number(minRating)}
+        }else if(maxRating){
+            queryObject.averageRating={$lte: Number(maxRating)}
+        }
+    }
     let result = Product.find(queryObject);
 
     // if (sort){
@@ -84,7 +89,6 @@ const getProducts = async (req, res)=>{
     result = result.skip(skip).limit(limit);
 
     const products = await result;
-    console.log(products);
     res.status(StatusCodes.OK).json({products, nbItems:products.length})
 }
 const createProduct = async (req, res)=>{
