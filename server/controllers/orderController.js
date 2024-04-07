@@ -48,8 +48,14 @@ const createOrder = async (req, res) => {
         `No product with id: ${item.product}`
       );
     }
-
-    const { name, price, amount, image, _id } = dbProduct;
+    
+    const { name, price, inventory, image, _id } = dbProduct;
+    if(dbProduct.inventory < item.amount){
+      throw CustomError.BadRequestError('Order amount cannot exceed product inventory!')
+    }else{
+      dbProduct.inventory -= item.amount;
+      await dbProduct.save();
+    }
     const singleOrderItem = {
       amount: item.amount,
       name,
