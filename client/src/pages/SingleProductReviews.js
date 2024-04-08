@@ -10,7 +10,7 @@ const SingleProductReviews = () => {
                 <img src={product?.image} alt={product?.name}/>
             </div>
             {reviews.map((review)=>{
-              return<div className="border">
+              return<div className="border" key={review._id}>
                 <p>Rating: {review.rating}</p>
                 <p>Title: {review.title}</p>
                 <p>Review: {review.comment}</p>
