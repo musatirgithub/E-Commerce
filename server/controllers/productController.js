@@ -12,7 +12,6 @@ const getAllProducts = async (req,res)=>{
 
 const getProducts = async (req, res)=>{
     const {featured, company, search:name, sort, fields, minprice:minPrice, maxprice:maxPrice, minrating:minRating, maxrating:maxRating} = req.query;
-    console.log("minRating: ", minRating, "maxRating: ", maxRating);
     const queryObject = {};
 
     if (featured){
