@@ -88,7 +88,7 @@ const SingleProduct = () => {
             <p className=" text-md font-semibold lowercase text-center py-3">({product?.numOfReviews} customer reviews)</p>
             </div>
             <div>
-            {reviews.length>0 && <p className=" text-md font-semibold text-blue-800 py-3 ps-3 cursor-pointer" onClick={()=>navigate(`/single-product-reviews/${id}`)}>See customer reviews...</p>}
+            {reviews?.length>0 && <p className=" text-md font-semibold text-blue-800 py-3 ps-3 cursor-pointer" onClick={()=>navigate(`/single-product-reviews/${id}`)}>See customer reviews...</p>}
             </div>
             {isOrderedByUser && <button className="btn btn-warning " onClick={()=>setIsCommentOpen(!isCommentOpen)}>{review?"Update review":"Write review"}</button>}
             {isCommentOpen && <WriteComment id={id} setIsCommentOpen={setIsCommentOpen}/>}
