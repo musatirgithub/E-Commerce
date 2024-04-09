@@ -9,18 +9,18 @@ import { useDispatch } from "react-redux";
 import { openModal } from "../features/productSlice";
 import {formatPrice} from "../utils/formatPrice";
 
-const TaskList = () => {
+const ProductList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { products } = useSelector((state) => state.product);
+  const { products, loading } = useSelector((state) => state.product);
 
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
   const { getAllProducts, deleteProduct, getProduct } = useProductCalls();
 
   useEffect(() => {
-    setLoading(true);
+    // setLoading(true);
     getAllProducts();
-    setLoading(false);
+    // setLoading(false);
   }, []);
 
   const handleClick = (id) => {
@@ -64,4 +64,4 @@ const TaskList = () => {
   );
 };
 
-export default TaskList;
+export default ProductList;
