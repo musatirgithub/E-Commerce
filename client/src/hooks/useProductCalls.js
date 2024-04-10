@@ -26,7 +26,7 @@ const useProductCalls = () => {
     }
   };
   const getProducts = async (formData) => {
-    const {search, minprice, maxprice, minrating, maxrating, company, sort} = formData
+    const {search, minprice, maxprice, minrating, maxrating, company, sort} = formData;
     dispatch(fetchStart());
     try {
       const { data } = await axiosPublic.get(`/api/v1/product/?search=${search}&minprice=${minprice}&maxprice=${maxprice}&minrating=${minrating}&maxrating=${maxrating}&company=${company}&sort=${sort}`, {withCredentials:'include'});
