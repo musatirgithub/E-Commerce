@@ -94,11 +94,11 @@ const createOrder = async (req, res) => {
 };
 const deleteOrder = async (req, res) => {
   const { id: orderId } = req.params;
+  checkPermissions(req.user, order.user);
   const order = await Order.findOneAndDelete({ _id: orderId });
   if (!order) {
     throw new CustomError.NotFoundError(`No order with id: ${orderId}`);
   }
-  checkPermissions(req.user, order.user);
   res.status(StatusCodes.OK).json({ msg: "Order deleted successfully" });
 };
 const updateOrder = async (req, res) => {
