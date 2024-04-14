@@ -1,7 +1,8 @@
-import {BrowserRouter, Routes, Route} from "react-router-dom";
-import { Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 import PrivateRouter from "./PrivateRouter";
+import AdminRouter from "./AdminRouter";
 
 import ChangePassword from "../pages/ChangePassword";
 import Login from "../pages/Login";
@@ -19,39 +20,48 @@ import Checkout from "../pages/Checkout";
 import Cart from "../pages/Cart";
 import Payment from "../pages/Payment";
 import Completion from "../pages/Completion";
+import Dashboard from "../pages/Dashboard";
 
 import Navbar from "../components/Navbar";
 import Footbar from "../components/Footbar";
 
-
-const AppRouter = ()=>{
-    return(
-        <BrowserRouter>
-            <Navbar/>
-            <Routes>
-                <Route path="/" element={<Home/>}/>
-                <Route path="/create-product" element={<CreateProduct/>}/>
-                <Route path="/payment" element={<Payment />}/>
-                <Route path='/single-product/:id' element={<SingleProduct />}/>
-                <Route path='/single-product-reviews/:id' element={<SingleProductReviews />}/>
-                <Route path="/checkout" element={<Checkout/>}/>
-                <Route path="/completion" element={<Completion/>}/>
-                <Route path="/cart" element={<Cart/>}/>
-                <Route path="/register" element={<Register/>}/>
-                <Route path="/login" element={<Login/>}/>
-                <Route path="/user/reset-password" element={<ResetPassword/>}/>
-                <Route path="/forgot-password" element={<ForgotPassword/>}/>
-                <Route path="/user/verify-email" element={<VerifyEmail/>}/>
-                <Route path="/forgot-password-warning" element={<ForgotPasswordWarning/>}/>
-                <Route path="/verify-email-warning" element={<VerifyEmailWarning/>}/>
-                <Route path="/change-password" element={<PrivateRouter/>}>
-                    <Route path="" element={<ChangePassword/>}/>
-                </Route>
-                <Route path="*" element={<Navigate to="/" />} />
-            </Routes>
-            <Footbar/>
-        </BrowserRouter>
-    )
-}
+const AppRouter = () => {
+  return (
+    <BrowserRouter>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/create-product" element={<CreateProduct />} />
+        <Route path="/dashboard" element={<AdminRouter />}>
+          <Route path="" element={<Dashboard />} />
+        </Route>
+        <Route path="/payment" element={<Payment />} />
+        <Route path="/single-product/:id" element={<SingleProduct />} />
+        <Route
+          path="/single-product-reviews/:id"
+          element={<SingleProductReviews />}
+        />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/completion" element={<Completion />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/user/reset-password" element={<ResetPassword />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/user/verify-email" element={<VerifyEmail />} />
+        <Route
+          path="/forgot-password-warning"
+          element={<ForgotPasswordWarning />}
+        />
+        <Route path="/verify-email-warning" element={<VerifyEmailWarning />} />
+        <Route path="/change-password" element={<PrivateRouter />}>
+          <Route path="" element={<ChangePassword />} />
+        </Route>
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
+      <Footbar />
+    </BrowserRouter>
+  );
+};
 
 export default AppRouter;
