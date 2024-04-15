@@ -19,7 +19,7 @@ const Navbar = () => {
         </div>
         <div className="flex justify-evenly gap-3">
           {role === "admin" ? (
-            <Link to="/create-product">New Prdct</Link>
+            <Link to="/Dashboard">Dashboard</Link>
           ) : null}
           <Link to="/change-password">Change Password</Link>
           <h4 onClick={logout} className="cursor-pointer">
