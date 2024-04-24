@@ -40,7 +40,8 @@ const CreateProduct = () => {
      className="object-cover"/>
     </div>
     <form onSubmit={handleSubmit} className="flex flex-col gap-3 justify-center items-center min-h-[screen-10rem]" autoComplete="off">
-      <section className="flex flex-col gap-3 ">
+      <section className="flex gap-12 ">
+      <div className="flex flex-col gap-3 ">
         <div className="flex flex-col gap-3">
       <label htmlFor="name" className="text-[#EEEDE8]">Name</label>
       <input type="name" name="name" id="name" required value={userInfo.name} onChange={handleChange} placeholder="Enter name..."
@@ -61,6 +62,8 @@ const CreateProduct = () => {
       <input type="file" name="image" id="image" required onChange={handleFileChange} placeholder="Select image..."
        className="bg-[#D9C6A7] text-[#0D1732] focus:outline-none border border-gray-300 rounded py-2 px-4 block w-full appearance-none placeholder-[#3A3B3C]"/>
       </div>
+      </div>
+      <div>
       <div className="flex flex-col gap-3">
 <label htmlFor="category" className="text-[#EEEDE8]">Category</label>
 <select
@@ -103,6 +106,7 @@ const CreateProduct = () => {
       <label htmlFor="inventory" className="text-[#EEEDE8]">Inventory</label>
       <input type="number" name="inventory" id="inventory" required value={userInfo.inventory} onChange={handleChange} placeholder="Enter inventory..."
        className="bg-[#D9C6A7] text-[#0D1732] focus:outline-none border border-gray-300 rounded py-2 px-4 block w-full appearance-none placeholder-[#3A3B3C]"/>
+      </div>
       </div>
       </section>
       <button type="submit" className={`btn bg-[#F8B664] hover:bg-[#C6A779] text-[#0D1732] w-full`} >Add Product</button>
