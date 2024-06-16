@@ -10,10 +10,15 @@ const SingleProductReviews = () => {
                 <img src={product?.image} alt={product?.name}/>
             </div>
             {reviews.map((review)=>{
-              return<div className="border" key={review._id}>
-                <p>Rating: {review.rating}</p>
-                <p>Title: {review.title}</p>
-                <p>Review: {review.comment}</p>
+              console.log(review);
+              return<div className="mx-auto w-[32rem] p-2" key={review._id}>
+                <div className=" flex justify-between">
+                <p className="text-[#1E4CB7] font-bold">{review.user.name}</p>
+                <p className="text-[#991B1B] font-bold">Rating: {review.rating}</p>
+                </div>
+                <p className="font-bold">{review.title}</p>
+                <p>{review.comment}</p>
+                <p className="border-b-2"></p>
               </div>
             })}
     </main>
