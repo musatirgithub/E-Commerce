@@ -5,7 +5,7 @@ import useProductCalls from "../hooks/useProductCalls";
 const SearchSort = () => {
   const {getProducts} = useProductCalls();
   const {minPrice, maxPrice} = useSelector((state)=>state.product);
-  const [formData, setFormData] = useState({search:"", minprice:"", maxprice:"", minrating:1, maxrating:5, company:"all", sort:"price"});
+  const [formData, setFormData] = useState({search:"", minprice:"", maxprice:"", minrating:0, maxrating:5, company:"all", sort:"price"});
   const handleChange = (e)=>{
     setFormData({...formData, [e.target.name]:e.target.value});
   }
