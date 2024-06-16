@@ -18,10 +18,15 @@ const createReview = async (req, res) => {
   if (!title || !comment || !rating || !product) {
     throw new CustomError.BadRequestError("Please provide all data!");
   }
-  const alreadyExists = await Review.findOne({product, user:req.user.userId});
-  if(alreadyExists){
-    throw new CustomError.BadRequestError("Users can write only one review per product!")
-  };
+  const alreadyExists = await Review.findOne({
+    product,
+    user: req.user.userId,
+  });
+  if (alreadyExists) {
+    throw new CustomError.BadRequestError(
+      "Users can write only one review per product!"
+    );
+  }
   const review = await Review.create({
     title,
     comment,
@@ -42,21 +47,24 @@ const deleteReview = async (req, res) => {
 };
 const updateReview = async (req, res) => {
   const { id: reviewId } = req.params;
-  const {rating, title, comment, product} = req.body;
-  const review = await Review.findOne({_id:reviewId});
-    if (!review) {
+  const { rating, title, comment, product } = req.body;
+  const review = await Review.findOne({ _id: reviewId });
+  if (!review) {
     throw new CustomError.NotFoundError(`No review with ID: ${reviewId}`);
   }
   checkPermissions(req.user, review.user);
   review.rating = rating;
-  review.title=title;
-  review.comment=comment;
+  review.title = title;
+  review.comment = comment;
   await review.save();
   res.status(StatusCodes.OK).json({ msg: "Success! Review updated." });
 };
 const getReview = async (req, res) => {
   const { id: productId } = req.params;
-  const review = await Review.findOne({ user:req.user.userId, product: productId});
+  const review = await Review.findOne({
+    user: req.user.userId,
+    product: productId,
+  });
   if (!review) {
     throw new CustomError.NotFoundError(`No review with ID: ${productId}`);
   }
@@ -64,10 +72,14 @@ const getReview = async (req, res) => {
 };
 const getProductReviews = async (req, res) => {
   const { id: productId } = req.params;
-  const reviews = await Review.find({ product: productId});
+  const reviews = await Review.find({ product: productId }).populate({
+    path: "user",
+    select: "name",
+  });
   if (!reviews) {
     throw new CustomError.NotFoundError(`No review with ID: ${productId}`);
   }
+  console.log(reviews)
   res.status(StatusCodes.OK).json({ reviews });
 };
 
