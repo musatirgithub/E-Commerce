@@ -52,6 +52,7 @@ const useProductCalls = () => {
       toastSuccessNotify(data.msg)
       await getAllProducts();
     } catch (err) {
+      dispatch(fetchFail());
       toastErrorNotify(err.response.data.msg);
     }
   };
@@ -62,6 +63,7 @@ const useProductCalls = () => {
       toastSuccessNotify(data.msg)
       await getAllProducts();
     } catch (err) {
+      dispatch(fetchFail());
       toastErrorNotify(err.response.data.msg);
     }
   };
@@ -71,6 +73,7 @@ const useProductCalls = () => {
       const {data} = await axiosPublic.get(`/api/v1/product/${id}`, {withCredentials:'include'});
       dispatch(getSingleProductSuccess(data.product));
     } catch (err) {
+      dispatch(fetchFail());
       toastErrorNotify(err.response.data.msg);
     }
   };
@@ -83,6 +86,7 @@ const useProductCalls = () => {
       await getAllProducts();
       await getProduct(id);
     } catch (err) {
+      dispatch(fetchFail());
       toastErrorNotify(err.response.data.msg);
     }
   };
