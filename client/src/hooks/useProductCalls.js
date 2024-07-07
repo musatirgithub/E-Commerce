@@ -4,6 +4,7 @@ import {
   fetchStart,
   getProductsSuccess,
   getSingleProductSuccess,
+  editProductSuccess,
   imageUpload,
   imageUploadFail,
   fetchFail,
@@ -81,7 +82,7 @@ const useProductCalls = () => {
     dispatch(fetchStart());
     try {
       const {data} = await axiosPublic.patch(`/api/v1/product/${id}`, productInfo, {withCredentials:'include'});
-      getSingleProductSuccess(data.product);
+      dispatch(editProductSuccess());
       toastSuccessNotify(data.msg);
       await getAllProducts();
       await getProduct(id);
