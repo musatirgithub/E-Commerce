@@ -44,7 +44,11 @@ const productSlice = createSlice({
       state.loading = false;
       state.product = payload;
     },
-
+    editProductSuccess: (state, { payload }) => {
+      state.loading = false;
+      state.product = payload;
+      state.imageAddress = null;
+    },
     fetchFail: (state) => {
       state.loading = false;
       state.error = true;
@@ -68,6 +72,7 @@ export const {
   fetchStart,
   getProductsSuccess,
   getSingleProductSuccess,
+  editProductSuccess,
   imageUpload,
   imageUploadFail,
   fetchFail,
