@@ -22,6 +22,7 @@ import Payment from "../pages/Payment";
 import Completion from "../pages/Completion";
 import Dashboard from "../pages/Dashboard";
 import ProductListAdmin from "../pages/ProductListAdmin";
+import EditProduct from "../pages/EditProduct";
 
 import Navbar from "../components/Navbar";
 import Footbar from "../components/Footbar";
@@ -38,6 +39,9 @@ const AppRouter = () => {
         </Route>
         <Route path="/productlist-admin" element={<AdminRouter />}>
           <Route path="" element={<ProductListAdmin />} />
+        </Route>
+        <Route path="/edit-product" element={<AdminRouter />}>
+          <Route path="" element={<EditProduct />} />
         </Route>
         <Route path="/payment" element={<Payment />} />
         <Route path="/single-product/:id" element={<SingleProduct />} />
