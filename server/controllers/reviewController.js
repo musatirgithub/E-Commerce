@@ -79,7 +79,6 @@ const getProductReviews = async (req, res) => {
   if (!reviews) {
     throw new CustomError.NotFoundError(`No review with ID: ${productId}`);
   }
-  console.log(reviews)
   res.status(StatusCodes.OK).json({ reviews });
 };
 
