@@ -6,7 +6,9 @@ const Dashboard = () => {
       <div>
         <Link to="/create-product">Create New Product</Link>
       </div>
-      <div>Product List</div>
+      <div>
+      <Link to="/productlist-admin">Product List</Link>
+      </div>
       <div>Order List</div>
     </main>
   );
