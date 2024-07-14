@@ -94,30 +94,33 @@ const createOrder = async (req, res) => {
 };
 const deleteOrder = async (req, res) => {
   const { id: orderId } = req.params;
-  checkPermissions(req.user, order.user);
   // const order = await Order.findOneAndDelete({ _id: orderId });
   const order = await Order.findOne({ _id: orderId });
+  checkPermissions(req.user, order.user);
   if (!order) {
     throw new CustomError.NotFoundError(`No order with id: ${orderId}`);
   }
-  for(let item of order.cartItems){
-    const dbProduct = await Product.findOne({_id:item.product});
-    dbProduct.inventory += item.amount;
-    await dbProduct.save();
+  for(let item of order.orderItems){
+    const dbProduct = await Product.findOne({_id:item.product.toString()});
+    if(dbProduct){
+      dbProduct.inventory += item.amount;
+      await dbProduct.save();
+    }
   }
+  await order.remove();
   res.status(StatusCodes.OK).json({ msg: "Order deleted successfully" });
 };
 const updateOrder = async (req, res) => {
   const { id: orderId } = req.params;
+  const checkOrder = await Order.findOne({_id:orderId});
+  if (!checkOrder) {
+    throw new CustomError.NotFoundError(`No order with ID: ${orderId}`);
+  }
+  checkPermissions(req.user, checkOrder.user);
   const order = await Order.findOneAndUpdate({ _id: orderId }, req.body, {
     new: true,
     runValidators: true,
   });
-  if (!order) {
-    throw new CustomError.NotFoundError(`No order with ID: ${orderId}`);
-  }
-
-  checkPermissions(req.user, order.user);
   res.status(StatusCodes.OK).json({ msg: "Success! Order updated." });
 };
 const getOrder = async (req, res) => {
