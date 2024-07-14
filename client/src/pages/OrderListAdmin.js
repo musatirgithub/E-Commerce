@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { openModal } from "../features/productSlice";
 import {formatPrice} from "../utils/formatPrice";
+import {formatDate} from "../utils/formatDate";
 
 const OrderListAdmin = () => {
   const dispatch = useDispatch();
@@ -47,31 +48,33 @@ const OrderListAdmin = () => {
     <div className="">
       {orders?.map((order, index) => {
         return (
-          <div
+          <section
             key={index}
-            className=" p-[1rem] flex items-center"
+            className=" p-[1rem] flex"
           >
-            <div className="w-[5rem] h-[5rem] object-cover object-center rounded-sm overflow-hidden px-2">
-              <img src={order.image} className="" />
-            </div>
-                <p className="w-[13rem] line-clamp-3 items-center">{order.name}</p>
-                <p className="w-[13rem]">{order._id}</p>
-                <p className="w-[6rem]">{formatPrice(order.subtotal)}</p>
-              <p className="line-clamp-3 w-[20rem]">{order.status}</p>
-              <p className="line-clamp-3 w-[20rem]">{order.address}</p>
-              {order.orderItems?.map((item, index)=>{
+                <p className="w-[6rem] line-clamp-3 items-center px-2">{formatDate(order.createdAt)}</p>
+                <p className="w-[6rem] line-clamp-3 items-center px-2">{formatDate(order.updatedAt)}</p>
+                <p className="w-[13.5rem] px-2">{order._id}</p>
+                <p className="w-[6rem] px-2">{formatPrice(order.total)}</p>
+              <p className="w-[8rem] px-2">{order.status}</p>
+              <p className="w-[18rem] px-2">{order.address}</p>
+              <div className="flex flex-col gap-3 w-[15rem]">
+              {order?.orderItems?.map((item, index)=>{
                 return (
                     <div key={index}>
-                        <p className="w-[6rem]">{formatPrice(item.name)}</p>
-                        <p className="w-[6rem]">{formatPrice(item.price)}</p>
-                        <p className="w-[6rem]">{formatPrice(item.amount)}</p>
-                        <p className="w-[6rem]">{formatPrice(item.product)}</p>
+                        <p className="w-[14.5rem]">{item.name}</p>
+                        <p className="w-[14.5rem]">{formatPrice(item.price)}</p>
+                        <p className="w-[14.5rem]">{item.amount}</p>
+                        <p className="w-[14.5rem]">{item.product}</p>
                     </div>
                 )
               })}
+              </div>
+              <div className="flex items-center">
               <div className="text-[#1E40AF] px-3 cursor-pointer" onClick={()=>handleEdit(order._id)}><FaPencilAlt/></div>
               <div className="text-[#991B1B] cursor-pointer" onClick={()=>handleDelete(order._id)}><FaRegTrashCan/></div>
-          </div>
+              </div>
+          </section>
         );
       })}
     </div>
