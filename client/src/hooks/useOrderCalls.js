@@ -5,6 +5,7 @@ import {
   getOrdersSuccess,
   getUserOrdersSuccess,
   getSingleOrderSuccess,
+  deleteOrderSuccess,
   fetchFail,
   setClientSecret,
   isOrderedByUserSuccess,
@@ -62,6 +63,7 @@ const useOrderCalls = () => {
       const { data } = await axiosPublic.delete(`/api/v1/order/${id}`, {
         withCredentials: "include",
       });
+      getOrders();
       toastSuccessNotify(data.msg);
       // await getOrders();
     } catch (err) {
