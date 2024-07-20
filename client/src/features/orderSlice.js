@@ -41,6 +41,9 @@ const orderSlice = createSlice({
       state.loading = false;
       state.order = payload;
     },
+    deleteOrderSuccess: (state)=>{
+      state.loading = false;
+    },
     setClientSecret: (state, {payload})=>{
       state.clientSecret = payload;
     },
@@ -140,6 +143,7 @@ export const {
   getOrdersSuccess,
   getUserOrdersSuccess,
   getSingleOrderSuccess,
+  deleteOrderSuccess,
   fetchFail,
   addCartItem,
   removeCartItem,
