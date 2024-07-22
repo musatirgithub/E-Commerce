@@ -23,6 +23,7 @@ import Completion from "../pages/Completion";
 import Dashboard from "../pages/Dashboard";
 import ProductListAdmin from "../pages/ProductListAdmin";
 import EditProduct from "../pages/EditProduct";
+import EditOrder from "../pages/EditOrder";
 import OrderListAdmin from "../pages/OrderListAdmin";
 
 import Navbar from "../components/Navbar";
@@ -46,6 +47,9 @@ const AppRouter = () => {
         </Route>
         <Route path="/edit-product" element={<AdminRouter />}>
           <Route path="" element={<EditProduct />} />
+        </Route>
+        <Route path="/edit-order" element={<AdminRouter />}>
+          <Route path="" element={<EditOrder />} />
         </Route>
         <Route path="/payment" element={<Payment />} />
         <Route path="/single-product/:id" element={<SingleProduct />} />
