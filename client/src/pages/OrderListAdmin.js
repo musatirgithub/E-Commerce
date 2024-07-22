@@ -26,7 +26,7 @@ const OrderListAdmin = () => {
 
   const handleEdit = (id) => {
     getOrder(id);
-    navigate(`/edit-product`);
+    navigate(`/edit-order`);
     // dispatch(openModal());
   };
   const handleDelete = (id) => {
