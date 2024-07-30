@@ -1,4 +1,7 @@
 export const formatDate = (receivedDate) => {
+    if(!receivedDate){
+      return
+    }
     const dateItems = receivedDate.split('-');
     const year = dateItems[0];
     const month = dateItems[1];
