@@ -10,18 +10,23 @@ const statusList = ["pending", "failed", "paid", "delivered", "canceled"];
 
 const EditOrder = () => {
   const dispatch = useDispatch();
-  const { getOrder } = useOrderCalls();
+  const { updateOrder } = useOrderCalls();
   const { order, loading } = useSelector((state) => state.order);
   const navigate = useNavigate();
   const [orderInfo, setOrderInfo] = useState({ status: "" });
+
+  console.log("orderInfo: ", orderInfo);
 
   useEffect(() => {
     setOrderInfo({ status: order?.status });
   }, []);
 
-  const handleSubmit = () => {};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    updateOrder(orderInfo, order?._id);
+  };
   const handleChange = (e) => {
-    setOrderInfo({ ...orderInfo, [e.target.name]: [e.target.value] });
+    setOrderInfo({ ...orderInfo, [e.target.name]: e.target.value});
   };
   if (loading) {
     return (
@@ -36,26 +41,26 @@ const EditOrder = () => {
       <div className="flex p-2 w-[30rem] mx-auto">
         <p className="w-[10rem]">Order Created At: </p>
         <p className="px-2">
-          : {formatDate(order.createdAt)}
+          : {formatDate(order?.createdAt)}
         </p>
       </div>
       <div className="flex p-2 w-[30rem] mx-auto">
         <p className="w-[10rem]">Order Updated At </p>
         <p className="px-2">
-          : {formatDate(order.updatedAt)}
+          : {formatDate(order?.updatedAt)}
         </p>
       </div>
       <div className="flex p-2 w-[30rem] mx-auto">
         <p className="w-[10rem]">Order Id </p>
-        <p className="px-2">: {order._id}</p>
+        <p className="px-2">: {order?._id}</p>
       </div>
       <div className="flex p-2 w-[30rem] mx-auto">
         <p className="w-[10rem]">Order Total </p>
-        <p className="px-2">: {formatPrice(order.total)}</p>
+        <p className="px-2">: {formatPrice(order?.total)}</p>
       </div>
       <div className="flex p-2 w-[30rem] mx-auto">
         <p className="w-[10rem]">Address </p>
-        <p className="px-2">: {order.address}</p>
+        <p className="px-2">: {order?.address}</p>
       </div>
 
       <div className="flex flex-col gap-3 w-[15rem]">
