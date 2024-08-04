@@ -42,19 +42,19 @@ const ProductListAdmin = () => {
     );
   }
   return (
-    <main className="min-h-[calc(100vh-8rem)]">
+    <main className="min-h-[calc(100vh-8rem)] mx-auto">
         <h2 className="text-center text-[1.5rem] font-bold">All Products (Alphabetical Order)</h2>
     <div className="">
       {products?.map((product, index) => {
         return (
           <div
             key={index}
-            className=" p-[1rem] flex items-center"
+            className=" p-[1rem] flex justify-center items-center mx-auto"
           >
             <div className="w-[5rem] h-[5rem] object-cover object-center rounded-sm overflow-hidden px-2">
               <img src={product.image} className="" />
             </div>
-                <p className="w-[13rem] line-clamp-3 items-center">{product.name}</p>
+                <p className="w-[13rem] line-clamp-3 items-center ps-2">{product.name}</p>
                 <p className="w-[13rem]">{product._id}</p>
                 <p className="w-[6rem]">{formatPrice(product.price)}</p>
               <p className="line-clamp-3 w-[20rem]">{product.description}</p>
