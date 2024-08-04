@@ -28,7 +28,7 @@ const SearchSort = () => {
     <section className="flex justify-center py-5">
       <form className="flex gap-3" onSubmit={handleSubmit}>
         <div className="flex flex-col gap-3">
-          <label htmlFor="search" className="text-[#EEEDE8]">
+          <label htmlFor="search" className="text-[#EEEDE8] ">
             Search
           </label>
           <input
@@ -142,8 +142,8 @@ const SearchSort = () => {
             </option>
           </select>
         </div>
-        <div className="">
-          <button type="submit" className="btn">Search</button>
+        <div className="flex items-end">
+          <button type="submit" className=" bg-amber-700 rounded text-white hover:bg-amber-600 h-[2.6rem] px-[1rem]">Search</button>
         </div>
       </form>
     </section>
