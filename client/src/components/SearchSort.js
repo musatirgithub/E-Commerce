@@ -38,7 +38,7 @@ const SearchSort = () => {
             value={formData.name}
             onChange={handleChange}
             placeholder="Enter product name..."
-            className="bg-[#D9C6A7] text-[#0D1732] focus:outline-none border border-gray-300 rounded py-2 px-4 block w-[21rem] appearance-none placeholder-[#3A3B3C]"
+            className="bg-[#D9C6A7] text-[#0D1732] focus:outline-none border border-gray-300 rounded py-2 px-4 block w-[18rem] appearance-none placeholder-[#3A3B3C]"
           />
         </div>
         <div className="flex flex-col gap-3"> 
