@@ -39,12 +39,12 @@ const ProductList = () => {
     );
   }
   return (
-    <div className="flex flex-wrap gap-5 px-16 ">
+    <div className="flex flex-wrap gap-5 px-16 py-5">
       {products?.map((product, index) => {
         return (
           <div
             key={index}
-            className={""}
+            className={" cursor-pointer"}
             onClick={() => handleClick(product._id)}
           >
             <div className="w-[21rem] h-[21rem] object-cover object-center rounded-t-lg overflow-hidden">
