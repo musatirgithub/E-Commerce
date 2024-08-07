@@ -17,7 +17,7 @@ if(loading){
 }
 
   return (
-    <div className="relative min-h-[calc(100vh-8rem)] bg-[#0D1732]">
+    <div className="relative min-h-[calc(100vh-8rem)]">
       <SearchSort />
       <ProductList/>
       {isModalOpen && <UpdateProductModal/>}
