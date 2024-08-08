@@ -95,16 +95,16 @@ const EditOrder = () => {
         autoComplete="off"
       >
         <div className="flex gap-12 ">
-          <div className="flex flex-col gap-3">
-            {/* <label htmlFor="status" className="text-[#EEEDE8] text-center">
-              Status
-            </label> */}
+          <div className="flex flex-col">
+            <label htmlFor="status" className="text-center py-3 font-bold text-[1.15rem]">
+              Change Status
+            </label>
             <select
               name="status"
               id="status"
               value={orderInfo?.status}
               onChange={handleChange}
-              className="bg-[#D9C6A7] text-[#0D1732] w-36 focus:outline-none border border-gray-300 rounded py-2 px-4 block w-full appearance-none placeholder-[#3A3B3C] mt-5"
+              className="bg-[#D9C6A7] text-[#0D1732] focus:outline-none border border-gray-300 rounded pb-2 px-4 block w-full appearance-none placeholder-[#3A3B3C]"
             >
               {statusList?.map((item, index) => {
                 return (
