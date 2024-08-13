@@ -34,7 +34,7 @@ const Payment = () => {
     <div className="min-h-[calc(100vh-8rem)] flex justify-center items-center">
       {stripePromise && clientSecret && (
               <div>
-              <h4 className="text-center font-semibold">Following Payment System is Connected to Stripe Demo Account. You will not be charged anyway!</h4>
+              <h4 className="text-center font-semibold">Following Payment System is Connected to a Stripe Demo Account. You will not be charged in any case!</h4>
               <h4 className="text-center font-semibold">For Testing Purposes You Can Use Following Card Number</h4>
               <h4 className="text-center text-red-800 font-bold p-4 border border-solid border-orange-800 my-2">4242 4242 4242 4242</h4>
         <Elements stripe={stripePromise} options={{clientSecret}}>
