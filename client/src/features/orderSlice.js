@@ -70,9 +70,12 @@ const orderSlice = createSlice({
     },
 
     removeCartItem: (state, { payload }) => {
-      state.cartItems = state.cartItems.filter((items) => {
-        return items.productId !== payload;
+      console.log("payload: ", payload);
+      console.log("cartItems1: ", state.cartItems);
+      state.cartItems = state.cartItems.filter((item) => {
+        return item.product !== payload;
       });
+      console.log("cartItems2: ", state.cartItems);
       state.numItemsInCart = 0;
       state.cartTotal = 0;
       state.cartItems.forEach((item) => {
@@ -88,7 +91,7 @@ const orderSlice = createSlice({
     increaseCartItem: (state, { payload }) => {
       console.log(payload);
       const selectedItem = state.cartItems.find(
-        (item) => item.productId === payload
+        (item) => item.product === payload
       );
 
       if (selectedItem) {
@@ -105,7 +108,7 @@ const orderSlice = createSlice({
 
     decreaseCartItem: (state, { payload }) => {
       const selectedItem = state.cartItems.find(
-        (item) => item.productId === payload
+        (item) => item.product === payload
       );
 
       if (selectedItem) {
