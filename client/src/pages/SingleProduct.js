@@ -161,13 +161,15 @@ const SingleProduct = () => {
           </div>
         </div>
       </section>
+      <div className="flex justify-center">
       <button
-        className={`${product?.inventory}`}
+        className={product?.inventory === 0 ? "bg-amber-700 rounded-lg text-white  w-[15rem] uppercase text-center p-2 font-bold my-5 mx-auto": "bg-amber-700 rounded-lg text-white hover:bg-amber-600 w-[15rem] uppercase text-center p-2 font-bold my-5 mx-auto cursor-pointer"}
         onClick={handleAddProduct}
         disabled={!product?.inventory}
       >
-        Add to Cart
+        {product?.inventory === 0 ? "Out of Stock": "Add to Cart"}
       </button>
+      </div>
     </main>
   );
 };
