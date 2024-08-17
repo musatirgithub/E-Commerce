@@ -66,14 +66,14 @@ const Cart = () => {
               <div className="flex justify-between w-[5rem] gap-2">
                 <p
                   className="text-2xl text-center font-bold bg-slate-200 text-black w-[2rem] rounded-lg cursor-pointer"
-                  onClick={() => dispatch(decreaseCartItem(item.productId))}
+                  onClick={() => dispatch(decreaseCartItem(item.product))}
                 >
                   -
                 </p>
                 <p className="text-2xl font-bold">{item.amount}</p>
                 <p
                   className="text-2xl text-center font-bold  bg-slate-200 text-black w-[2rem] rounded-lg cursor-pointer"
-                  onClick={() => dispatch(increaseCartItem(item.productId))}
+                  onClick={() => dispatch(increaseCartItem(item.product))}
                 >
                   +
                 </p>
@@ -81,7 +81,7 @@ const Cart = () => {
               <div>
                 <MdDelete
                   className="text-amber-700 text-3xl cursor-pointer"
-                  onClick={() => dispatch(removeCartItem(item.productId))}
+                  onClick={() => dispatch(removeCartItem(item.product))}
                 />
               </div>
             </article>
