@@ -70,12 +70,9 @@ const orderSlice = createSlice({
     },
 
     removeCartItem: (state, { payload }) => {
-      console.log("payload: ", payload);
-      console.log("cartItems1: ", state.cartItems);
       state.cartItems = state.cartItems.filter((item) => {
         return item.product !== payload;
       });
-      console.log("cartItems2: ", state.cartItems);
       state.numItemsInCart = 0;
       state.cartTotal = 0;
       state.cartItems.forEach((item) => {
