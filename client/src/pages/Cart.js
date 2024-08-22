@@ -51,15 +51,15 @@ const Cart = () => {
         {cartItems.map((item) => {
           return (
             <article
-              className="flex justify-evenly items-center"
+              className="flex justify-center items-center"
               key={item.product}
             >
-              <div className="w-[5rem] object-cover">
+              <div className="w-[5rem] object-cover py-1">
                 <img src={item.image} alt="item.name" />
               </div>
               <div>
-                <h5 className="font-semibold">{item.name}</h5>
-                <h5 className=" text-amber-900 font-semibold">
+                <h5 className="font-semibold w-[20rem] pl-4">{item.name}</h5>
+                <h5 className=" text-amber-600 font-semibold  w-[10rem] pl-4">
                   {formatPrice(item.price * item.amount)}
                 </h5>
               </div>
@@ -80,7 +80,7 @@ const Cart = () => {
               </div>
               <div>
                 <MdDelete
-                  className="text-amber-700 text-3xl cursor-pointer"
+                  className="text-amber-600 text-3xl cursor-pointer w-[8rem]"
                   onClick={() => dispatch(removeCartItem(item.product))}
                 />
               </div>
