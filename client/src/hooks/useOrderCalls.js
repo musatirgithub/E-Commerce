@@ -11,6 +11,8 @@ import {
   isOrderedByUserSuccess,
   isOrderedByUserFail,
 } from "../features/orderSlice";
+
+import useProductCalls from "../hooks/useProductCalls";
 import { axiosPublic } from "../utils/axiosPublic";
 import { useNavigate } from "react-router-dom";
 import { toastSuccessNotify, toastErrorNotify } from "../helper/ToastNotify";
@@ -19,6 +21,7 @@ const useOrderCalls = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const { getAllProducts } = useProductCalls();
 
   const getOrders = async () => {
     dispatch(fetchStart());
@@ -29,7 +32,6 @@ const useOrderCalls = () => {
       dispatch(getOrdersSuccess(data.orders));
     } catch (err) {
       dispatch(fetchFail());
-
     }
   };
   const getUserOrders = async () => {
@@ -95,29 +97,29 @@ const useOrderCalls = () => {
       toastSuccessNotify(data.msg);
       await getOrders();
       await getOrder(id);
+      await getAllProducts();
     } catch (err) {
       dispatch(fetchFail());
       toastErrorNotify(err.response.data.msg);
     }
   };
 
-  const isProductOrdered = async (id)=>{
+  const isProductOrdered = async (id) => {
     dispatch(fetchStart());
     try {
       const { data } = await axiosPublic.get(
         `/api/v1/order/check-if-ordered/${id}`,
         { withCredentials: "include" }
       );
-      if(data.ordered){
+      if (data.ordered) {
         dispatch(isOrderedByUserSuccess());
-      }else {
+      } else {
         dispatch(isOrderedByUserFail());
-      };
+      }
     } catch (err) {
-        toastErrorNotify(err.response.data.msg);
+      toastErrorNotify(err.response.data.msg);
     }
-  }
-
+  };
 
   return {
     // getAllTasks,
