@@ -15,8 +15,6 @@ const EditOrder = () => {
   const navigate = useNavigate();
   const [orderInfo, setOrderInfo] = useState({ status: "" });
 
-  console.log("orderInfo: ", orderInfo);
-
   useEffect(() => {
     setOrderInfo({ status: order?.status });
   }, []);
