@@ -28,7 +28,6 @@ const getUserOrders = async (req, res) => {
 
 const createOrder = async (req, res) => {
   const { tax, shipping: shippingFee, cartItems, address } = req.body;
-
   if (!cartItems || cartItems.length < 1) {
     throw new CustomError.BadRequestError("No cart items provided!");
   }
@@ -40,7 +39,7 @@ const createOrder = async (req, res) => {
 
   let orderItems = [];
   let subTotal = 0;
-  
+
   for (let item of cartItems) {
     const dbProduct = await Product.findOne({ _id: item.product });
     if (!dbProduct) {
@@ -48,11 +47,13 @@ const createOrder = async (req, res) => {
         `No product with id: ${item.product}`
       );
     }
-    
+
     const { name, price, inventory, image, _id } = dbProduct;
-    if(dbProduct.inventory < item.amount){
-      throw CustomError.BadRequestError('Order amount cannot exceed product inventory!')
-    }else{
+    if (inventory < item.amount) {
+      throw CustomError.BadRequestError(
+        "Order amount cannot exceed product inventory!"
+      );
+    } else {
       dbProduct.inventory -= item.amount;
       await dbProduct.save();
     }
@@ -70,17 +71,18 @@ const createOrder = async (req, res) => {
   const total = tax + shippingFee + subTotal;
 
   //   // Stripe payment intent
-  
   const paymentIntent = await stripe.paymentIntents.create({
     currency: "usd",
     amount: total,
     automatic_payment_methods: { enabled: true },
   });
 
+  console.log("paymentIntent: ", paymentIntent);
+
   const order = await Order.create({
     orderItems,
     total,
-    subtotal:subTotal,
+    subtotal: subTotal,
     tax,
     shippingFee,
     address,
@@ -100,9 +102,9 @@ const deleteOrder = async (req, res) => {
   if (!order) {
     throw new CustomError.NotFoundError(`No order with id: ${orderId}`);
   }
-  for(let item of order.orderItems){
-    const dbProduct = await Product.findOne({_id:item.product.toString()});
-    if(dbProduct){
+  for (let item of order.orderItems) {
+    const dbProduct = await Product.findOne({ _id: item.product.toString() });
+    if (dbProduct) {
       dbProduct.inventory += item.amount;
       await dbProduct.save();
     }
@@ -112,7 +114,7 @@ const deleteOrder = async (req, res) => {
 };
 const updateOrder = async (req, res) => {
   const { id: orderId } = req.params;
-  const checkOrder = await Order.findOne({_id:orderId});
+  const checkOrder = await Order.findOne({ _id: orderId });
   if (!checkOrder) {
     throw new CustomError.NotFoundError(`No order with ID: ${orderId}`);
   }
@@ -121,6 +123,38 @@ const updateOrder = async (req, res) => {
     new: true,
     runValidators: true,
   });
+  if (
+    (checkOrder.status === "pending" && req.body.status === "failed") ||
+    (checkOrder.status === "pending" && req.body.status === "canceled") ||
+    (checkOrder.status === "paid" && req.body.status === "failed") ||
+    (checkOrder.status === "paid" && req.body.status === "canceled") ||
+    (checkOrder.status === "delivered" && req.body.status === "failed") ||
+    (checkOrder.status === "delivered" && req.body.status === "canceled")
+  ) {
+    for (let item of order.orderItems) {
+      const dbProduct = await Product.findOne({ _id: item.product.toString() });
+      if (dbProduct) {
+        dbProduct.inventory -= item.amount;
+        await dbProduct.save();
+      }
+    }
+  }
+  if (
+    (checkOrder.status === "failed" && req.body.status === "pending") ||
+    (checkOrder.status === "failed" && req.body.status === "paid") ||
+    (checkOrder.status === "failed" && req.body.status === "delivered") ||
+    (checkOrder.status === "canceled" && req.body.status === "pending") ||
+    (checkOrder.status === "canceled" && req.body.status === "paid") ||
+    (checkOrder.status === "canceled" && req.body.status === "delivered")
+  ) {
+    for (let item of order.orderItems) {
+      const dbProduct = await Product.findOne({ _id: item.product.toString() });
+      if (dbProduct) {
+        dbProduct.inventory += item.amount;
+        await dbProduct.save();
+      }
+    }
+  }
   res.status(StatusCodes.OK).json({ msg: "Success! Order updated." });
 };
 const getOrder = async (req, res) => {
@@ -150,20 +184,20 @@ const createPaymentIntent = async (req, res) => {
   }
 };
 
-const checkIfUserOrderedProduct = async (req,res)=>{
-  const {id} = req.params;
-  const orders = await Order.find({ user: req.user.userId })
+const checkIfUserOrderedProduct = async (req, res) => {
+  const { id } = req.params;
+  const orders = await Order.find({ user: req.user.userId });
   let ordered = false;
-  orders.forEach((item)=>{
-    item.orderItems.forEach((orderItem)=>{
+  orders.forEach((item) => {
+    item.orderItems.forEach((orderItem) => {
       const productId = orderItem.product.toString();
-      if(productId === id){
+      if (productId === id) {
         ordered = true;
       }
-    })
-  })
-  res.status(StatusCodes.OK).json({ordered});
-}
+    });
+  });
+  res.status(StatusCodes.OK).json({ ordered });
+};
 
 module.exports = {
   getAllOrders,
