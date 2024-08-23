@@ -39,7 +39,7 @@ const CheckoutForm = () => {
     <form id="payment-form" onSubmit={handleSubmit} >
         <PaymentElement />
         <div className="flex justify-center">
-        <button disabled={isProcessing} id="submit" className="btn btn-primary btn-wide my-4">
+        <button disabled={isProcessing} id="submit" className="btn btn-wide my-4 bg-amber-700 rounded-lg hover:bg-amber-600">
             <span id="button-text">
                 {isProcessing ? "Processing...":"Pay now"}
             </span>
