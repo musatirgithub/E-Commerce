@@ -10,7 +10,6 @@ const SingleProductReviews = () => {
                 <img src={product?.image} alt={product?.name}/>
             </div>
             {reviews.map((review)=>{
-              console.log(review);
               return<div className="mx-auto w-[32rem] p-2" key={review._id}>
                 <div className=" flex justify-between">
                 <p className="text-[#1E4CB7] font-bold">{review.user.name}</p>
