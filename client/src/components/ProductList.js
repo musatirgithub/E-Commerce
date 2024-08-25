@@ -47,15 +47,15 @@ const ProductList = () => {
             className={" cursor-pointer"}
             onClick={() => handleClick(product._id)}
           >
-            <div className="w-[21rem] h-[21rem] object-cover object-center rounded-t-lg overflow-hidden">
+            <div className="w-[18rem] h-[18rem] object-cover object-center rounded-t-lg overflow-hidden">
               <img src={product.image} className="" />
             </div>
-            <div className="text-white rounded-b-lg">
-              <div className="flex justify-between w-[21rem] ">
+            <div className="text-white rounded-b-lg w-[18rem] bg-white ">
+              <div className="flex justify-between text-[1.1rem] text-black font-semibold px-1">
                 <p>{product.name}</p>
                 <p>{formatPrice(product.price)}</p>
               </div>
-              <p className="line-clamp-3">{product.description}</p>
+              <p className="line-clamp-3 text-[0.8rem] text-black font-semibold text-justify pt-1 px-1 h-[4.5rem]">{product.description}</p>
             </div>
           </div>
         );
