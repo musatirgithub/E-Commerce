@@ -16,7 +16,12 @@ const config = (req, res) => {
   res.send({ publishableKey: process.env.PUBLISHABLE_KEY });
 };
 const getAllOrders = async (req, res) => {
-  const orders = await Order.find({}).select("-user").sort("");
+  const orders = await Order.find({})
+    .populate({
+      path: "user",
+      select: "name",
+    })
+    .select("-clientSecret").sort("");
   res.status(StatusCodes.OK).json({ orders });
 };
 const getUserOrders = async (req, res) => {
@@ -76,8 +81,6 @@ const createOrder = async (req, res) => {
     amount: total,
     automatic_payment_methods: { enabled: true },
   });
-
-  console.log("paymentIntent: ", paymentIntent);
 
   const order = await Order.create({
     orderItems,
