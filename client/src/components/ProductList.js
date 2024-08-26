@@ -39,7 +39,7 @@ const ProductList = () => {
     );
   }
   return (
-    <div className="flex flex-wrap gap-5 px-16 py-5">
+    <div className="flex flex-wrap gap-16 px-20 py-5 mb-5">
       {products?.map((product, index) => {
         return (
           <div
@@ -51,11 +51,11 @@ const ProductList = () => {
               <img src={product.image} className="" />
             </div>
             <div className="text-white rounded-b-lg w-[18rem] bg-white ">
-              <div className="flex justify-between text-[1.1rem] text-black font-semibold px-1">
+              <div className="flex justify-between text-[1.1rem] text-orange-900 font-semibold px-1">
                 <p>{product.name}</p>
                 <p>{formatPrice(product.price)}</p>
               </div>
-              <p className="line-clamp-3 text-[0.8rem] text-black font-semibold text-justify pt-1 px-1 h-[4.5rem]">{product.description}</p>
+              <p className="line-clamp-3 text-[0.8rem] text-slate-700 font-semibold text-justify pt-1 px-1 h-[4.1rem]">{product.description}</p>
             </div>
           </div>
         );
