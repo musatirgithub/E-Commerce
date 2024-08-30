@@ -26,7 +26,7 @@ const useOrderCalls = () => {
   const getOrders = async () => {
     dispatch(fetchStart());
     try {
-      const { data } = await axiosPublic.get("/api/v1/order/", {
+      const { data } = await axiosPublic.get("/api/v1/order/all-orders", {
         withCredentials: "include",
       });
       dispatch(getOrdersSuccess(data.orders));
