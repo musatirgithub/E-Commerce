@@ -41,7 +41,7 @@ const EditProduct = () => {
       if(imageAddress && !loading){
         updateProduct({...userInfo, image:imageAddress}, product?._id);
       }
-    },[imageAddress, loading])
+    },[imageAddress])
 
 
     if(loading){
