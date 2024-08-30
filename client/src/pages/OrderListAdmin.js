@@ -52,6 +52,7 @@ const OrderListAdmin = () => {
             key={index}
             className=" p-[1rem] flex"
           >
+                <p className="w-[6rem] line-clamp-3 items-center px-2">{order.user.name}</p>
                 <p className="w-[6rem] line-clamp-3 items-center px-2">{formatDate(order.createdAt)}</p>
                 <p className="w-[6rem] line-clamp-3 items-center px-2">{formatDate(order.updatedAt)}</p>
                 <p className="w-[13.5rem] px-2">{order._id}</p>
