@@ -1,4 +1,4 @@
-# [Project : Node E Commerce Project]()
+# [Project : Node E Commerce Project(Still Under Construction)]()
 ## Table of contents
 
   - [The challenge](#the-challenge)
@@ -9,7 +9,7 @@
 
 
 ## The challenge
-Project aims to develop a safe task tracker; multiple users can signup, signin and use.
+Project aims to develop a safe e commerce site; where admin can manage products and users can signup, signin and buy products online.
 
 ## Problem Statement
 
@@ -17,8 +17,16 @@ Project aims to develop a safe task tracker; multiple users can signup, signin a
 - Provides a verification link in email.
 - Stores user passwords in the database as encrypted.
 - Sends reset password link to user email address in case user forgets the password.
-- Each user can see, update, delete his/her own tasks. 
-- According to the deadline, app provides a warning sign (red for passed deadlines, orange for deadlines witihin 24 hours, yellow for deadlines within 48 hours. 
+- User change the password when already signed in.
+- Admin creates, updates and deletes products using dashboard, which is designed for admin.
+- Admin changes status of order using dashboard, which is designed for admin.
+- Users can search products according to name, price, product rate and sort products in different varieties. 
+- Users can add products to the Cart, %5 tax and $7.5 shipping cost added automatically per order.
+- If a specific product is out of stock, user cannot order.
+- User can make the payment with card.
+- User can see reviews for any product but can write a product only if he/she had bought the product. And can update the review afterwards.
+- Average rating is recalculated, every time a user gave a new rating, the rating is updated or deleted.
+- Inventory level for each product is updated after each order create, order delete and order status change (pending, failed, paid, delivered, canceled).
 <hr>
 
 
@@ -39,8 +47,8 @@ Project aims to develop a safe task tracker; multiple users can signup, signin a
 - For encryption and decryption jwt package is used,
 - For backend security; express-rate-limit, helmet, xss-clean, cors, express-mongo-sanitize packages are used,
 - Token exchange between frontend and backend provided by adding double layered cookies (authentication token, refreshtoken),
-- Front end developed by using React,
-- Global state management is provided by using Redux-persist,
+- Frontend is developed by using React,
+- Global state management is done by using Redux-persist,
 - For providing multipage experience to user, React Router Dom is used,
 - For styling, traditidional Tailwind CSS is used.
 
@@ -74,6 +82,7 @@ I used;
 - [REACT](https://reactjs.org/) 
 - [REACT ROUTER](https://reactrouter.com/en/main) 
 - [TAILWINDCSS](https://styled-components.com/)
+- [STRIPE](https://docs.stripe.com/)
 
 
 
