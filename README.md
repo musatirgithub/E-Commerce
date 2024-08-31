@@ -50,6 +50,7 @@ Project aims to develop a safe e commerce site; where admin can manage products 
 - Frontend is developed by using React,
 - Global state management is done by using Redux-persist,
 - For providing multipage experience to user, React Router Dom is used,
+- Payment system is provided using Stripe,
 - For styling, traditidional Tailwind CSS is used.
 
 ------
