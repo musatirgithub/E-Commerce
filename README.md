@@ -62,6 +62,7 @@ I used;
 - React
 - Redux-persist
 - React Router
+- Stripe
 - Tailwind CSS
 
 
