@@ -34,7 +34,7 @@ Project aims to develop a safe e commerce site; where admin can manage products 
 
 ## Screenshot
 <p align="center">
-<img src="E-Commerce(1).gif" alt="gif">
+<img src="E-Commerce1 (1).gif" alt="gif">
 </p>
 
 
