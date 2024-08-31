@@ -34,7 +34,7 @@ Project aims to develop a safe e commerce site; where admin can manage products 
 
 ## Screenshot
 <p align="center">
-<a href="https://node-task-tracker.vercel.app/"><img src="nodeTaskTracker.gif" alt="gif"></a>
+<img src="E-Commerce(1).gif" alt="gif">
 </p>
 
 
