@@ -1,4 +1,4 @@
-# [Project : Node E Commerce Project(Still Under Construction)]()
+# [Project : Node E Commerce Project (Still Under Construction)]()
 ## Table of contents
 
   - [The challenge](#the-challenge)
@@ -69,7 +69,7 @@ I used;
 
 ## Lesson Learned
 
-- Before starting this project, I had very limited knowledge about CORS. During the project I have faced many difficulties related with CORS issues. During the deployment I have deployed my backend to Render and Frontend to Vercel. But project didn't work. After a long research I have learned that I had to use sameSite : "None" property when I was adding cookies to the response. And when sending requests from frontend to backend I had to add {withCredentials: "included"}.
+- This project took a long time. Mainly because I had other responsibilities during daytime and I had only 1 or 2 hours in a day to develop this project. So it was difficult for me to concentrate to the project. And because this project is very detailed it was difficult to foresee the structure at the beginnig. So I've wrote some code and changed structure at some points. If I start to a project like this or more complicated, I would try to focus on planning more. 
 
 ### Useful resources
 
