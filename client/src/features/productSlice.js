@@ -25,7 +25,6 @@ const productSlice = createSlice({
     },
     imageUploadFail:(state)=>{
       state.imageAddress = null;
-      console.log("image upload failed");
     },
 
     getProductsSuccess: (state, { payload }) => {
