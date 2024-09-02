@@ -41,7 +41,6 @@ const UpdateProductModal = () => {
     e.preventDefault();
     updateProduct(formData, product._id);
     dispatch(closeModal());
-    console.log(formData);
   };
 
   useEffect(() => {
