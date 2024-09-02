@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import useReviewCalls from "../hooks/useReviewCalls";
 
 const WriteComment = ({ id, setIsCommentOpen }) => {
-  const { createReview, getReview, updateReview } = useReviewCalls();
+  const { createReview, getReview, updateReview, getReviews } = useReviewCalls();
   const { review } = useSelector((state) => state.review);
   const [commentData, setCommentData] = useState(
     review
@@ -26,6 +26,7 @@ const WriteComment = ({ id, setIsCommentOpen }) => {
 
   useEffect(() => {
     getReview(id);
+    getReviews();
   }, []);
   return (
     <section className="text-center">
