@@ -5,7 +5,7 @@ import useProductCalls from "../hooks/useProductCalls";
 const SearchSort = () => {
   const {getProducts} = useProductCalls();
   const {minPrice, maxPrice} = useSelector((state)=>state.product);
-  const [formData, setFormData] = useState({search:"", minprice:"", maxprice:"", minrating:0, maxrating:5, company:"all", sort:"price"});
+  const [formData, setFormData] = useState({search:"", minprice:"", maxprice:"", minrating:0, maxrating:5, company:"all", sort:""});
   const handleChange = (e)=>{
     setFormData({...formData, [e.target.name]:e.target.value});
   }
@@ -25,7 +25,7 @@ const SearchSort = () => {
     "kitchenaid",
   ];
   return (
-    <section className="flex justify-center py-5">
+    <section className="flex justify-center py-[3rem]">
       <form className="flex gap-3" onSubmit={handleSubmit}>
         <div className="flex flex-col gap-3">
           <label htmlFor="search" className="text-[#EEEDE8] ">
@@ -128,6 +128,9 @@ const SearchSort = () => {
             onChange={handleChange}
             className="bg-[#D9C6A7] text-[#0D1732] focus:outline-none border border-gray-300 rounded py-2 px-4 block w-[10.5rem] appearance-none placeholder-[#3A3B3C]"
           >
+            <option value={""}>
+              
+            </option>
             <option value={"price"}>
               Price Ascending
             </option>
