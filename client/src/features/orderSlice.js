@@ -86,7 +86,6 @@ const orderSlice = createSlice({
     },
 
     increaseCartItem: (state, { payload }) => {
-      console.log(payload);
       const selectedItem = state.cartItems.find(
         (item) => item.product === payload
       );
