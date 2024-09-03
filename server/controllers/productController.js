@@ -74,7 +74,7 @@ const getProducts = async (req, res)=>{
     if (sort){
         result = result.sort(sort);
     }else{
-        result = result.sort('createdAt')
+        // result = result.sort('createdAt')
     }
 
     // if(fields){
