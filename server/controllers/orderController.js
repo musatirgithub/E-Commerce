@@ -137,7 +137,7 @@ const updateOrder = async (req, res) => {
     for (let item of order.orderItems) {
       const dbProduct = await Product.findOne({ _id: item.product.toString() });
       if (dbProduct) {
-        dbProduct.inventory -= item.amount;
+        dbProduct.inventory += item.amount;
         await dbProduct.save();
       }
     }
@@ -153,7 +153,7 @@ const updateOrder = async (req, res) => {
     for (let item of order.orderItems) {
       const dbProduct = await Product.findOne({ _id: item.product.toString() });
       if (dbProduct) {
-        dbProduct.inventory += item.amount;
+        dbProduct.inventory -= item.amount;
         await dbProduct.save();
       }
     }
