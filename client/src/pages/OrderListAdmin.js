@@ -37,9 +37,9 @@ const OrderListAdmin = () => {
   }
   if (orders && orders.length === 0) {
     return (
-      <section className="text-center pt-5 text-[#EEEDE8]">
+      <main className="text-center pt-5 text-[#EEEDE8] min-h-[calc(100vh-8rem)]">
         No orders to show...
-      </section>
+      </main>
     );
   }
   return (
