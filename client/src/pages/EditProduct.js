@@ -10,7 +10,6 @@ const companies = ['ikea', 'maiden', 'eternity', 'lumens', 'sony', 'bose', 'kitc
 const EditProduct = () => {
   const {imageAddress} = useSelector((state)=>state.product);
   const {product, loading} = useSelector((state)=>state.product);
-  console.log("product", product);
   // const {_id:productId, name, price, description, image, category, company, inventory, featured, freeShipping}=product;
   const {uploadImage, updateProduct} = useProductCalls();
   const [userInfo, setUserInfo] = useState({name:"", price:0, description:"", image:"", category:"", company:"", inventory:0, featured:"", freeShipping:""});
