@@ -20,8 +20,9 @@ const SingleProduct = () => {
   const { review, reviews } = useSelector((state) => state.review);
   const navigate = useNavigate();
   const { id } = useParams();
-  // const [loading, setLoading] = useState(false);
+  // adjusts products amount
   const [amount, setAmount] = useState(0);
+  // opens and closes comments
   const [isCommentOpen, setIsCommentOpen] = useState(false);
 
   const handleIncrease = () => {
@@ -60,7 +61,7 @@ const SingleProduct = () => {
   useEffect(() => {
     setAmount(product?.inventory === 0 ? 0 : 1);
   }, [product]);
-  
+
   if (loading) {
     return (
       <div>
@@ -88,28 +89,28 @@ const SingleProduct = () => {
               </p>
             </div>
           </div>
-          <div>
+          <div className="w-[35rem]">
             <p className="ps-3 text-lg font-bold text-amber-800">
               {formatPrice(product?.price)}
             </p>
             <p className="ps-3 text-lg font-semibold underline">Description:</p>
-            <p className="ps-3 text-lg">{product?.description}</p>
+            <p className="ps-3">{product?.description}</p>
             <div className=" ps-3 flex ">
-              <p className="w-[6rem] font-semibold">Available:</p>
-              <p>{product?.inventory > 0 ? "In Stock" : "Out of Stock"}</p>
+              <p className="w-[6rem] font-semibold underline">Available</p>
+              <p>{product?.inventory > 0 ? ": In Stock" : ": Out of Stock"}</p>
             </div>
-            <div className=" ps-3 flex ">
-              <p className="w-[6rem] font-semibold">Brand:</p>
-              <p className="capitalize">{product?.company}</p>
+            <div className=" ps-3 flex pb-3">
+              <p className="w-[6rem] font-semibold underline">Brand</p>
+              <p className="capitalize">: {product?.company}</p>
             </div>
             <div className="ps-3 flex flex-row gap-2">
-              <p className=" text-md font-bold capitalize text-center py-3">
+              <p className=" text-md font-bold capitalize text-center py-1">
                 Average Rating{" "}
               </p>
               <div className=" min-w-[2rem] bg-red-800 text-white rounded-md flex justify-center items-center">
                 <p className=" font-bold text-xl ">{product?.averageRating}</p>
               </div>
-              <p className=" text-md font-semibold lowercase text-center py-3">
+              <p className=" text-md font-semibold lowercase text-center py-1">
                 {product?.numOfReviews == 1
                   ? `${product?.numOfReviews} customer review`
                   : `${product?.numOfReviews} customer reviews`}
@@ -117,16 +118,25 @@ const SingleProduct = () => {
             </div>
           </div>
         </div>
+        {/* This part is dealing with reviews */}
         <div className="mx-auto flex flex-col items-center">
-          {reviews?.length > 0 && (
+          {reviews?.length > 0 ? (
             <p
               className=" text-md font-semibold text-blue-400 py-3 ps-3 cursor-pointer"
               onClick={() => navigate(`/single-product-reviews/${id}`)}
             >
               See customer reviews...
             </p>
+          ) : (
+            <p
+              className=" text-md font-semibold text-blue-400 py-3 ps-3"
+          
+            >
+              No customer reviews...
+            </p>
           )}
-
+          {/* This part  checks whether the user ordered the product. If user already ordered the product and wrote a review, 
+          can Update teh review. If ordered but did not write a review yet, can write a review. */}
           {isOrderedByUser && (
             <button
               className="btn btn-warning "
@@ -143,6 +153,7 @@ const SingleProduct = () => {
             />
           )}
         </div>
+        {/* This part controls the product amount */}
         <div className="my-[2rem] flex justify-center gap-3">
           <div
             className="min-w-[2rem] bg-gray-300 text-black text-center text-3xl font-bold rounded-md cursor-pointer"
@@ -161,14 +172,20 @@ const SingleProduct = () => {
           </div>
         </div>
       </section>
+      {/* If there is enough inventory, clicking button adds given number of products into the shopping cart.
+      If the product is out of stock, button is disabled, amount is set to 0 and user can't change the amount. */}
       <div className="flex justify-center">
-      <button
-        className={product?.inventory === 0 ? "bg-amber-700 rounded-lg text-white  w-[15rem] uppercase text-center p-2 font-bold my-5 mx-auto": "bg-amber-700 rounded-lg text-white hover:bg-amber-600 w-[15rem] uppercase text-center p-2 font-bold my-5 mx-auto cursor-pointer"}
-        onClick={handleAddProduct}
-        disabled={!product?.inventory}
-      >
-        {product?.inventory === 0 ? "Out of Stock": "Add to Cart"}
-      </button>
+        <button
+          className={
+            product?.inventory === 0
+              ? "bg-amber-700 rounded-lg text-white  w-[15rem] uppercase text-center p-2 font-bold my-5 mx-auto"
+              : "bg-amber-700 rounded-lg text-white hover:bg-amber-600 w-[15rem] uppercase text-center p-2 font-bold my-5 mx-auto cursor-pointer"
+          }
+          onClick={handleAddProduct}
+          disabled={!product?.inventory}
+        >
+          {product?.inventory === 0 ? "Out of Stock" : "Add to Cart"}
+        </button>
       </div>
     </main>
   );
