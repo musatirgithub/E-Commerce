@@ -35,7 +35,7 @@ const OrderListAdmin = () => {
   if (loading) {
     return <div>Loading...</div>;
   }
-  if (orders && orders.length === 0) {
+  if (orders && orders?.length === 0) {
     return (
       <main className="text-center pt-5 text-[#EEEDE8] min-h-[calc(100vh-8rem)]">
         No orders to show...
@@ -52,9 +52,9 @@ const OrderListAdmin = () => {
             key={index}
             className=" p-[1rem] flex"
           >
-                <p className="w-[6rem] line-clamp-3 items-center px-2">{order.user.name}</p>
-                <p className="w-[6rem] line-clamp-3 items-center px-2">{formatDate(order.createdAt)}</p>
-                <p className="w-[6rem] line-clamp-3 items-center px-2">{formatDate(order.updatedAt)}</p>
+                <p className="w-[6rem] line-clamp-3 items-center px-2">{order?.user?.name}</p>
+                <p className="w-[6rem] line-clamp-3 items-center px-2">{formatDate(order?.createdAt)}</p>
+                <p className="w-[6rem] line-clamp-3 items-center px-2">{formatDate(order?.updatedAt)}</p>
                 <p className="w-[13.5rem] px-2">{order._id}</p>
                 <p className="w-[6rem] px-2">{formatPrice(order.total)}</p>
               <p className="w-[8rem] px-2">{order.status}</p>
@@ -63,10 +63,10 @@ const OrderListAdmin = () => {
               {order?.orderItems?.map((item, index)=>{
                 return (
                     <div key={index}>
-                        <p className="w-[14.5rem]">{item.name}</p>
-                        <p className="w-[14.5rem]">{formatPrice(item.price)}</p>
-                        <p className="w-[14.5rem]">{item.amount}</p>
-                        <p className="w-[14.5rem]">{item.product}</p>
+                        <p className="w-[14.5rem]">{item?.name}</p>
+                        <p className="w-[14.5rem]">{formatPrice(item?.price)}</p>
+                        <p className="w-[14.5rem]">{item?.amount}</p>
+                        <p className="w-[14.5rem]">{item?.product}</p>
                     </div>
                 )
               })}
